@@ -1,0 +1,13 @@
+@import 'abstracts/variables';
+@import 'base/typography';
+@import 'abstracts/mixins';
+@import 'base/css-reset';
+@import 'base/root';
+@import 'utilties/spacing';
+//TODO check if they ⬆ are necessary️
+@import 'pages/onboarding';
+@import 'components/black-gradient-icon';
+@import 'components/onboarding-content';
+@import 'components/gradient-button';
+@import 'components/stepper';
+@import 'components/gender-icons';

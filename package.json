@@ -1,5 +1,5 @@
 {
-  "name": "react-ts-playground",
+  "name": "human-design-web-app",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,10 +9,16 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "i18next": "^22.4.15",
+    "i18next-browser-languagedetector": "^7.0.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-i18next": "^12.2.2",
+    "react-router-dom": "^6.11.0",
+    "vite-plugin-svgr": "^2.4.0"
   },
   "devDependencies": {
+    "@types/node": "^18.16.3",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.1",
@@ -24,6 +30,7 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.7",
+    "sass": "^1.62.1",
     "typescript": "^4.9.3",
     "vite": "^4.2.0"
   }

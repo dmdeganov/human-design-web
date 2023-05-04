@@ -1,0 +1,21 @@
+$stepper-bottom: 11vh;
+
+.stepper {
+  display: flex;
+  gap: 12px;
+  position: absolute;
+  right: 50%;
+  transform: translateX(50%);
+  bottom: $stepper-bottom;
+  &__dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 3.5px;
+    background-color: $white;
+    opacity: 0.2;
+    transition: all 0.2s;
+    &--active{
+      opacity: 1;
+    }
+  }
+}

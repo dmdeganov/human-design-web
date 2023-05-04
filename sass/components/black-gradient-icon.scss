@@ -1,0 +1,10 @@
+.black-gradient-icon{
+  display: grid;
+  background: linear-gradient(0deg, #121212 0%, #333333 100%);
+  width: 107px;
+  height: 107px;
+  border-radius: 24px;
+  & > * {
+    place-self: center;
+  }
+}

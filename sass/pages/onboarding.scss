@@ -1,0 +1,80 @@
+$outer-chakra-diameter--desktop: 120vh;
+$inner-chakra-diameter--desktop: calc(#{$outer-chakra-diameter--desktop}* 0.82);
+//$gradient-circle-diameter: 62vh;
+$gradient-circle-diameter: 44vw;
+
+.onboarding {
+  background: linear-gradient(0deg, #0e0e0f, #0e0e0f), #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  height: 100vh;
+  &__chakras {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    opacity: 0.2;
+  }
+  &__gradient-circle {
+    width: $gradient-circle-diameter;
+    height: $gradient-circle-diameter;
+    left: calc(-#{$gradient-circle-diameter} *0.55);
+    top: calc((100% - #{$gradient-circle-diameter}) / 2);
+    position: absolute;
+    opacity: 0.48;
+    background: linear-gradient(90deg, #4d8dbc 0%, #5352bd 100%, #5352bd 100%);
+    filter: blur(calc(0.2 *#{$gradient-circle-diameter}));
+    border-radius: calc(#{$gradient-circle-diameter}/ 2);
+    &--right {
+      background: linear-gradient(90deg, #4d8dbc 0%, #5352bd 100%, #5352bd 100%);
+      left: unset;
+      right: calc(-#{$gradient-circle-diameter} *0.55);
+
+    }
+  }
+  &__outer-chakra {
+    animation: rotating-clockwise 120s linear infinite;
+    position: absolute;
+    width: $outer-chakra-diameter--desktop;
+    height: $outer-chakra-diameter--desktop;
+    top: calc(50% - #{$outer-chakra-diameter--desktop}/ 2);
+    left: calc(50% - #{$outer-chakra-diameter--desktop}/ 2);
+    //top: calc(50% - 615px);
+    //left: calc(50% - 615px);
+  }
+
+  &__inner-chakra {
+    animation: rotating-counter-clockwise 120s linear infinite;
+    position: absolute;
+    width: $inner-chakra-diameter--desktop;
+    height: $inner-chakra-diameter--desktop;
+    top: calc(50% - #{$inner-chakra-diameter--desktop}/ 2);
+    left: calc(50% - #{$inner-chakra-diameter--desktop}/ 2);
+    //top: calc(50% - 495px);
+    //left: calc(50% - 495px);
+  }
+  &__content{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+@keyframes rotating-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating-counter-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}

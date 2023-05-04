@@ -1,0 +1,11 @@
+.gender-icons {
+  display: flex;
+  gap: 16px;
+  .gender-icon{
+    width: 101px;
+    height: 101px;
+    background: rgba(14, 14, 15, 0.75);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+  }
+}

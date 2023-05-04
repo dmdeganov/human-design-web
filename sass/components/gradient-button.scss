@@ -1,0 +1,20 @@
+.gradient-button {
+  background: linear-gradient(90deg, #4d8dbc 0%, #5352bd 100%), rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  width: 100%;
+  height: 48px;
+  font-weight: 700;
+  color: $white;
+  font-size: 16px;
+  letter-spacing: 2px;
+  cursor: pointer;
+  transition: all 0.2s;
+  &:active{
+    color: $text-gray;
+    opacity: 0.7;
+  }
+}

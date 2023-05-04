@@ -1,0 +1,39 @@
+.onboarding-content {
+  max-width: 335px;
+  animation: opacity-animated 0.5s linear;
+
+  .black-gradient-icon {
+    margin-bottom: 48px;
+  }
+  h1 {
+    margin-bottom: 12px;
+  }
+  &__description {
+    text-align: center;
+    margin-bottom: 48px;
+    p:not(:last-child) {
+      margin-bottom: 16px;
+      line-height: 19px;
+    }
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.2s;
+  }
+  &__gender-icons{
+
+  }
+}
+
+
+@keyframes opacity-animated {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
