@@ -1,7 +1,8 @@
 import React from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
-import {GenderIcon} from '@/assets/svg';
+import {GenderIcon, FemaleIcon, MaleIcon, NonBinaryIcon} from '@/assets/svg';
 import {useTranslation} from 'react-i18next';
+
 
 const WhatIsHumanDesign = () => {
   const {t} = useTranslation();
@@ -15,18 +16,18 @@ const WhatIsHumanDesign = () => {
         <p>{t('onboarding.intro.gender.description')}</p>
       </div>
       <div className="onboarding-content__gender-icons gender-icons">
-        <div className="gender-icon">
-
+        <button className="gender-icon">
+          <MaleIcon/>
           {t('onboarding.intro.gender.male')}
-        </div>
-        <div className="gender-icon">
+        </button>
+        <button className="gender-icon">
+          <FemaleIcon/>
           {t('onboarding.intro.gender.female')}
-
-        </div>
-        <div className="gender-icon">
+        </button>
+        <button className="gender-icon">
+          <NonBinaryIcon/>
           {t('onboarding.intro.gender.non_binary')}
-
-        </div>
+        </button>
       </div>
     </>
   );

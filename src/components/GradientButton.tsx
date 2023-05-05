@@ -1,14 +1,13 @@
 import React from 'react';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  text: string;
   children?: React.ReactNode;
 }
 
-const GradientButton: React.FC<ButtonProps> = ({text, onClick, ...rest}) => {
+const GradientButton: React.FC<ButtonProps> = ({children, onClick, ...rest}) => {
   return (
     <button onClick={onClick} {...rest} className="gradient-button">
-      {text}
+      {children}
     </button>
   );
 };

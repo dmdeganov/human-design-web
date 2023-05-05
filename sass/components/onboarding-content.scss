@@ -6,10 +6,14 @@
     margin-bottom: 48px;
   }
   h1 {
+    text-align: center;
     margin-bottom: 12px;
+    white-space: pre-line;
   }
   &__description {
+    color: $gray-07;
     text-align: center;
+    white-space: pre-line;
     margin-bottom: 48px;
     p:not(:last-child) {
       margin-bottom: 16px;
@@ -23,8 +27,9 @@
     opacity: 1;
     transition: opacity 0.2s;
   }
-  &__gender-icons{
-
+  .text-input{
+    margin-bottom: 48px;
+    width: 100%;
   }
 }
 

@@ -1,0 +1,21 @@
+.text-input {
+  //height: 64px;
+  padding-bottom: 22px;
+  background: transparent;
+  border-bottom: 1px solid $gray-04;
+  transition: all 0.2s;
+  color: $white;
+  font-size: 16px;
+  font-family: 'SF Pro', sans-serif;
+  text-align: center;
+  ::-webkit-input-placeholder {
+    text-align: center;
+  }
+
+  :-moz-placeholder {
+    text-align: center;
+  }
+  &:focus {
+    border-bottom: 1px solid $white;
+  }
+}

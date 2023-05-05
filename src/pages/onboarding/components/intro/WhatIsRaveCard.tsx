@@ -1,7 +1,7 @@
 import React from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
-import {ReactComponent as BodygraphIcon} from '@/assets/svg/bodygraph.svg';
 import {useTranslation} from 'react-i18next';
+import {BodyGraphIcon} from "@/assets/svg";
 
 const WhatIsHumanDesign = () => {
   const {t} = useTranslation();
@@ -9,7 +9,7 @@ const WhatIsHumanDesign = () => {
   return (
     <>
       <BlackGradientTile>
-        <BodygraphIcon />
+        <BodyGraphIcon />
       </BlackGradientTile>
       <h1>{t('onboarding.intro.rave_card.title')}</h1>
       <div className="onboarding-content__description">
