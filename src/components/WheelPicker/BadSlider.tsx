@@ -3,7 +3,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-export const SlidingDatePicker = () => {
+export const BadSlider = () => {
   const [slidesAmount, setSlidesAmount] = useState(17);
   const slides = new Array(slidesAmount).fill(null).map((_, index) => index);
 

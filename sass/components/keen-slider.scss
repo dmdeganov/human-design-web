@@ -6,8 +6,9 @@ body {
 }
 
 .keen-slider {
-  height: 252px;
-  overflow: visible;
+  height: 222px;
+  width: unset;
+
   //justify-content: center;
   //align-content: center !important;
   //align-items: center;
@@ -24,34 +25,26 @@ body {
   //  max-height: 100vh;
   //}
   &__inner {
-    height: 36px;
-    overflow: visible;
-    //display: flex;
-    //flex-direction: column;
-    //justify-content: center;
-    //align-items: center;
+    display: flex;
+    margin: 0 27px;
+    span {
+      display: inline-block;
+      transition: all 0.3s;
+      font-size: 20px;
+      //line-height: 1;
+    }
   }
   &__slide {
     font-weight: 400;
-    font-size: 15px;
-    text-align: center;
+    overflow: visible !important;
     letter-spacing: 0.38px;
     color: #ffffff;
     z-index: 5;
-    transition-property: font-size, color;
+    transition-property: font-size, color, bottom, top;
     transition-duration: 0.2s;
     //transition: font-size 0.2s, color 0.2s;
     align-items: center;
     justify-content: center;
-  }
-  &__center-highlight {
-    position: absolute;
-    height: 36px;
-    width: 100%;
-    top: 50%;
-    transform: translateY(-50%);
-    background: #3a3a3d;
-    border-radius: 10px;
   }
 }
 

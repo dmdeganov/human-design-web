@@ -1,0 +1,1 @@
+export {BadSlider} from './BadSlider'

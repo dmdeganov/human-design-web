@@ -14,8 +14,8 @@ const OnBoarding = () => {
     questionnaire: questionnaireSteps,
   };
 
-  const [stage, setStage] = useState<Stage>('questionnaire');
-  const [step, setStep] = useState<step>(1);
+  const [stage, setStage] = useState<Stage>('intro');
+  const [step, setStep] = useState<step>(0);
   const goForward = ()=> setStep(step + 1)
   const goBack = ()=> setStep(step - 1)
   const stepsAmount = Object.keys(stages[stage]).length;

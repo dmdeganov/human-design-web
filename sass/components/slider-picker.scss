@@ -1,0 +1,17 @@
+.slider-picker {
+  display: flex;
+  position: relative;
+  width: 376px;
+  padding: 0 16px;
+  border: 1px solid yellow;
+
+  &__center-highlight {
+    position: absolute;
+    height: 32px;
+    width: calc(100% - 32px);
+    top: 50%;
+    transform: translateY(-50%);
+    background: #3a3a3d;
+    border-radius: 10px;
+  }
+}

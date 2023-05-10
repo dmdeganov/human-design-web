@@ -1,11 +1,11 @@
 import React from 'react';
-import {SlidingDatePicker} from '@/components/SlidingDatePicker'
+import {BadSlider} from '@/components/WheelPicker'
 
 const BirthDate = () => {
   return (
     <div>
       BirthDate
-      <SlidingDatePicker/>
+      <BadSlider/>
     </div>
   );
 };

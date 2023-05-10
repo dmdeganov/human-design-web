@@ -1,1 +1,0 @@
-export {SlidingDatePicker} from './SlidingDatePicker'
