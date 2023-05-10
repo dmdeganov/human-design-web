@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 import {intro} from "@/translation/en/onboarding/intro";
 import {common} from "@/translation/en/common";
+import {questionnaire} from "@/translation/en/onboarding/questionnaire";
 
 i18n
   .use(initReactI18next) // passes i18n down to react-i18next
@@ -14,7 +15,8 @@ i18n
         translation: {
           common,
           onboarding: {
-            intro
+            intro,
+            questionnaire
           }
         },
       },

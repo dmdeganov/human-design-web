@@ -1,11 +1,28 @@
 .gender-icons {
   display: flex;
   gap: 16px;
+  margin-bottom: 48px;
   .gender-icon{
+    cursor: pointer;
+    color: $white;
+    display: flex;
+    flex-direction: column;
+    padding-top: 18px;
+    padding-bottom: 15px;
+    align-items: center;
+    row-gap: 5px;
     width: 101px;
     height: 101px;
     background: rgba(14, 14, 15, 0.75);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.2s;
+    &:hover{
+      background: rgba(28, 28, 29, 0.75);
+    }
+    &:active{
+      transform: scale(0.98);
+    }
   }
 }
