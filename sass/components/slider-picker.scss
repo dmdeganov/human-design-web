@@ -4,6 +4,18 @@
   width: 376px;
   padding: 0 16px;
   border: 1px solid yellow;
+  -webkit-mask-image: -webkit-linear-gradient(
+    rgba(0, 0, 0, 0.25) 0%,
+    rgba(0, 0, 0, 0.6) 20%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.6) 42.84%,
+    rgba(0, 0, 0, 1) 42.845%,
+    rgba(0, 0, 0, 1) 57.155%,
+    rgba(0, 0, 0, 0.6) 57.16%,
+    rgba(0, 0, 0, 0.6) 60%,
+    rgba(0, 0, 0, 0.6) 80%,
+    rgba(0, 0, 0, 0.25) 100%
+  );
 
   &__center-highlight {
     position: absolute;

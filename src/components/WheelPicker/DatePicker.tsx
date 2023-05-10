@@ -37,7 +37,7 @@ const months = [
 const getNumberOfDaysInMonth = (monthIndex: number, year: number) => new Date(year, monthIndex + 1, 0).getDate();
 const currentYear = new Date().getFullYear();
 
-const DatePicker = ({adjustLineHeight = false, animatedTextTranslation = false}) => {
+const DatePicker = () => {
   const [days, setDays] = useState(getMemoizedIntegersArr(31));
   const date = useRef<PickedDate>({day: days[0], month: months[0], year: currentYear});
 
@@ -56,23 +56,8 @@ const DatePicker = ({adjustLineHeight = false, animatedTextTranslation = false})
   };
   return (
     <div className="slider-picker">
-      <Wheel
-        type="day"
-        slides={days}
-        wheelWidth={250}
-        resultRef={date}
-        adjustLineHeight={adjustLineHeight}
-        animatedTextTranslation={animatedTextTranslation}
-      />
-      <Wheel
-        type="month"
-        slides={months}
-        onScrollEnd={onMonthChange}
-        wheelWidth={400}
-        resultRef={date}
-        adjustLineHeight={adjustLineHeight}
-        animatedTextTranslation={animatedTextTranslation}
-      />
+      <Wheel type="day" slides={days} wheelWidth={250} resultRef={date} />
+      <Wheel type="month" slides={months} onScrollEnd={onMonthChange} wheelWidth={400} resultRef={date} />
       <Wheel
         type="year"
         initial={currentYear - minYear}
@@ -82,8 +67,6 @@ const DatePicker = ({adjustLineHeight = false, animatedTextTranslation = false})
         minIndex={minPickableYear - minYear}
         maxIndex={maxPickableYear - minYear}
         onScrollEnd={onYearChange}
-        adjustLineHeight={adjustLineHeight}
-        animatedTextTranslation={animatedTextTranslation}
       />
       <div className="slider-picker__center-highlight" />
     </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {memo, useEffect, useRef, useState} from 'react';
 import {useKeenSlider, KeenSliderPlugin, TrackDetails} from 'keen-slider/react';
 import {PickedDate, PickedTime, WheelType} from '@/components/WheelPicker/types';
 import {useDebounce} from '@/hooks/useDebounce';
@@ -85,8 +85,6 @@ interface WheelProps {
   onScrollEnd?: (num: number) => void;
   resultRef: React.MutableRefObject<PickedDate | PickedTime>;
   wheelWidth: number;
-  adjustLineHeight: boolean;
-  animatedTextTranslation: boolean;
   initial?: number;
 }
 export default function Wheel({
@@ -98,10 +96,8 @@ export default function Wheel({
   wheelWidth,
   type,
   initial,
-  adjustLineHeight,
-  animatedTextTranslation,
 }: WheelProps) {
-  const [styledSlides, setStyledSlides] = useState<any>([]);
+  const [styledSlides, setStyledSlides] = useState<Array<{value: number | string; style: React.CSSProperties}>>([]);
   const [sliderState, setSliderState] = React.useState<TrackDetails | null>(null);
   const [sliderRef] = useKeenSlider<HTMLDivElement>(
     {
@@ -114,16 +110,15 @@ export default function Wheel({
       dragSpeed: 0.5,
       vertical: true,
       loop: true,
-      rubberband: true,
+      // rubberband: true,
       mode: 'free-snap',
       detailsChanged: s => {
         setSliderState(s.track.details);
       },
       animationEnded: s => {
         const pickedSlideIndex = s.track.details.rel;
-        const result = resultRef.current;
+        const result = resultRef.current as {[key: string]: number | string};
         result[type] = slides[pickedSlideIndex];
-
         if (minIndex && pickedSlideIndex < minIndex) s.moveToIdx(minIndex);
         if (maxIndex && pickedSlideIndex > maxIndex) s.moveToIdx(maxIndex);
         if (onScrollEnd) onScrollEnd(pickedSlideIndex);
@@ -143,7 +138,6 @@ export default function Wheel({
         ? indexOfSlideInCenter + distance
         : distance - (slides.length - indexOfSlideInCenter),
     });
-    const values = [];
 
     const slidesInView = {
       center: indexOfSlideInCenter,
@@ -151,6 +145,7 @@ export default function Wheel({
       twoSlidesFar: getSlidesOnDefinedDistance(2),
       threeSlidesFar: getSlidesOnDefinedDistance(3),
     };
+    const values = [];
 
     for (let i = 0; i < slides.length; i++) {
       const indicesDiff = Math.abs(i - indexOfSlideInCenter);
@@ -158,29 +153,29 @@ export default function Wheel({
         indicesDiff < Math.abs(slides.length - 3) ? indicesDiff : indicesDiff - slides.length,
       );
 
-      let style;
+      let style: React.CSSProperties = {
+        transform: `scale(0.75)  translateX(-16.67%)`,
+      };
       if (distanceFromCenter === 0) {
         style = {
-          color: '#fff',
+          transform: `scale(1)`,
         };
       }
       if (distanceFromCenter === 1) {
         style = {
-          color: '#99999f',
+          transform: `scale(0.95) translateX(-2.6%)`,
         };
       }
       if (distanceFromCenter === 2) {
         const translateY = slidesInView.twoSlidesFar.next === i ? `translateY(-3px)` : 'translateY(3px)';
         style = {
-          color: '#99999f',
-          transform: `scale(0.85) translateX(-7.5%) ${translateY}`,
+          transform: `scale(0.85) translateX(-8.82%) ${translateY}`,
         };
       }
-      if (distanceFromCenter >= 3) {
-        const translateY = slidesInView.threeSlidesFar.prev === i ? `translateY(6px)` : `translateY(-6px)`;
+      if (distanceFromCenter === 3) {
+        const translateY = slidesInView.threeSlidesFar.prev === i ? `translateY(8px)` : `translateY(-8px)`;
         style = {
-          color: '#5b5b5e',
-          transform: `scale(0.75)  translateX(-12.5%) ${translateY}`,
+          transform: `scale(0.75)  translateX(-16.67%) ${translateY}`,
         };
       }
       values.push({
@@ -188,7 +183,6 @@ export default function Wheel({
         style,
       });
     }
-
     return values;
   };
 
@@ -197,20 +191,30 @@ export default function Wheel({
   }, [sliderState, slides.length]);
 
   return (
-    <>
-      <div ref={sliderRef} className="keen-slider" style={{width: `${wheelWidth}px`}}>
-        {/*<div className="keen-slider__inner">*/}
-        {(styledSlides.length ? styledSlides : getStyledSlides()).map(slide => {
-          const {value, style} = slide;
-          return (
-            <div key={value} className="keen-slider__slide">
-              <div className="keen-slider__inner">
-                <span style={style}>{value}</span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </>
+    <div ref={sliderRef} className="keen-slider" style={{width: `${wheelWidth}px`}}>
+      {(styledSlides.length ? styledSlides : getStyledSlides()).map(slide => {
+        const {value, style} = slide;
+        return <WheelInnerMemoized key={value} value={value} styleJSON={JSON.stringify(style)} />;
+      })}
+    </div>
   );
 }
+interface WheelInnerProps {
+  value: number | string;
+  styleJSON: string;
+}
+
+function WheelInner({value, styleJSON}: WheelInnerProps) {
+  const style = JSON.parse(styleJSON) as React.CSSProperties;
+  return (
+    <div key={value} className="keen-slider__slide">
+      <div className="keen-slider__inner">
+        <span style={style}>{value}</span>
+      </div>
+    </div>
+  );
+}
+function arePropsEqual(oldProps: WheelInnerProps, newProps: WheelInnerProps) {
+  return oldProps.styleJSON === newProps.styleJSON;
+}
+const WheelInnerMemoized = memo(WheelInner, arePropsEqual);
