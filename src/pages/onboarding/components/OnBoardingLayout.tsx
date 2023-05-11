@@ -1,5 +1,5 @@
 import React, {Dispatch, SetStateAction, useRef} from 'react';
-import {GatesCircleSVG, ZodiacCircleSVG} from '@/assets/svg';
+import {BackIcon, GatesCircleSVG, ZodiacCircleSVG} from '@/assets/svg';
 import {GradientButton} from '@/components';
 import {useTranslation} from 'react-i18next';
 import {Stage} from '@/pages/onboarding/types';
@@ -44,6 +44,8 @@ const OnBoardingLayout: React.FC<Props> = ({
       goForward();
     }, 200);
   };
+  const isBackIconVisible = stage === 'questionnaire' && currentStep > 0;
+
   const onStepBack = () => {
     const contentInner = onBoardingContentRef.current as HTMLDivElement;
     contentInner.style.opacity = '0';
@@ -55,6 +57,7 @@ const OnBoardingLayout: React.FC<Props> = ({
 
   return (
     <main className="onboarding">
+      {isBackIconVisible && <BackIcon className="onboarding__back-icon" onClick={onStepBack}/>}
       <div className="onboarding__gradient-circle" />
       <div className="onboarding__gradient-circle onboarding__gradient-circle--right" />
       <div className="onboarding__chakras">
@@ -71,10 +74,7 @@ const OnBoardingLayout: React.FC<Props> = ({
       </div>
       <div className="onboarding__stepper stepper">
         {steps.map(step => (
-          <div
-            key={step}
-            className={`stepper__dot${step === currentStep ? ' stepper__dot--active' : ''}`}
-          />
+          <div key={step} className={`stepper__dot${step === currentStep ? ' stepper__dot--active' : ''}`} />
         ))}
       </div>
     </main>

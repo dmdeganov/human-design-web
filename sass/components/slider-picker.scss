@@ -1,9 +1,12 @@
 .slider-picker {
-  display: flex;
+  display: grid;
+  place-content: center;
+  grid-template-columns: repeat(3, min-content);
+  align-items: center;
+  column-gap: 32px;
   position: relative;
-  width: 376px;
-  padding: 0 16px;
-  border: 1px solid yellow;
+  justify-self: center;
+  padding: 0 32px;
   -webkit-mask-image: -webkit-linear-gradient(
     rgba(0, 0, 0, 0.25) 0%,
     rgba(0, 0, 0, 0.6) 20%,
@@ -20,7 +23,7 @@
   &__center-highlight {
     position: absolute;
     height: 32px;
-    width: calc(100% - 32px);
+    width: 100%;
     top: 50%;
     transform: translateY(-50%);
     background: #3a3a3d;

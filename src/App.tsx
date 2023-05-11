@@ -1,7 +1,7 @@
 import React from 'react';
 import {createBrowserRouter, redirect, RouterProvider} from 'react-router-dom';
 import OnBoarding from '@/pages/onboarding/OnBoarding';
-import DatePicker from '@/components/WheelPicker/DatePicker';
+import DatePicker from '@/components/wheel-pickers/DatePicker';
 
 const loader = async () => {
   return redirect('/onboarding');

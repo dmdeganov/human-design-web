@@ -60,6 +60,17 @@ $gradient-circle-diameter: 44vw;
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  &__back-icon{
+    position: absolute;
+    z-index: 10;
+    left: 40px;
+    top: 40px;
+    cursor: pointer;
+    transition: all 0.2s;
+    &:active{
+      transform: scale(0.95);
+    }
+  }
 }
 
 @keyframes rotating-clockwise {
