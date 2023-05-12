@@ -11,20 +11,10 @@ interface WheelProps {
   minIndex?: number;
   maxIndex?: number;
   onScrollEnd?: (num: number) => void;
-  resultRef: React.MutableRefObject<PickedDate | PickedTime>;
-  wheelWidth: number;
+  resultRef: React.MutableRefObject<(PickedDate | PickedTime) & {isAnimationActive: boolean}>;
   initial?: number;
 }
-export default function Wheel({
-  slides,
-  minIndex,
-  maxIndex,
-  onScrollEnd,
-  resultRef,
-  wheelWidth,
-  type,
-  initial,
-}: WheelProps) {
+export default function Wheel({slides, minIndex, maxIndex, onScrollEnd, resultRef, type, initial}: WheelProps) {
   const [styledSlides, setStyledSlides] = useState<Array<{value: number | string; style: React.CSSProperties}>>([]);
   const [sliderState, setSliderState] = React.useState<TrackDetails | null>(null);
   const [sliderRef] = useKeenSlider<HTMLDivElement>(
@@ -42,14 +32,16 @@ export default function Wheel({
       mode: 'free-snap',
       detailsChanged: s => {
         setSliderState(s.track.details);
+        resultRef.current.isAnimationActive = s.animator.active;
       },
       animationEnded: s => {
         const pickedSlideIndex = s.track.details.rel;
-        const result = resultRef.current as {[key: string]: number | string};
+        const result = resultRef.current as {[key: string]: number | string | boolean};
         result[type] = slides[pickedSlideIndex];
         if (minIndex && pickedSlideIndex < minIndex) s.moveToIdx(minIndex);
         if (maxIndex && pickedSlideIndex > maxIndex) s.moveToIdx(maxIndex);
         if (onScrollEnd) onScrollEnd(pickedSlideIndex);
+        resultRef.current.isAnimationActive = s.animator.active;
       },
     },
     [MutationPlugin, WheelControls],

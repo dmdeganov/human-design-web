@@ -4,7 +4,7 @@ import TextInput from '@/components/TextInput';
 import {OnBoardingContentProps} from "@/pages/onboarding/types";
 import {GradientButton} from "@/components";
 
-const Email = ({onStepForward}: OnBoardingContentProps) => {
+const Email = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
   const [email, setEmail] = useState('');
 
@@ -15,7 +15,7 @@ const Email = ({onStepForward}: OnBoardingContentProps) => {
         <p>{t('onboarding.questionnaire.email.description')}</p>
       </div>
       <TextInput value={email} onChange={e => setEmail(e.target.value)} placeholder={t('onboarding.questionnaire.email.input_placeholder') || ''}/>
-      <GradientButton onClick={onStepForward}>
+      <GradientButton onClick={goForward}>
         {t('common.next')}
       </GradientButton>
     </>

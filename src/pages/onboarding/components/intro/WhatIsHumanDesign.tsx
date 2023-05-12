@@ -6,7 +6,7 @@ import {GradientButton} from '@/components';
 import {OnBoardingContentProps} from "@/pages/onboarding/types";
 
 
-const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
+const WhatIsHumanDesign = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
 
   return (
@@ -20,7 +20,7 @@ const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
         <p>{t('onboarding.intro.human_design.description_second_line')}</p>
         <p>{t('onboarding.intro.human_design.description_third_line')}</p>
       </div>
-      <GradientButton onClick={onStepForward}>
+      <GradientButton onClick={goForward}>
         {t('common.next')}
       </GradientButton>
     </>

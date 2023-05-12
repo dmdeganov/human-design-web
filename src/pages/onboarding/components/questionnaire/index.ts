@@ -7,7 +7,7 @@ import Email from './Email';
 import {OnBoardingContentProps} from '@/pages/onboarding/types';
 
 type StepsMap = {
-  [num: number]: ({onStepForward}: OnBoardingContentProps) => JSX.Element;
+  [num: number]: ({goForward}: OnBoardingContentProps) => JSX.Element;
 };
 
 export const questionnaireSteps: StepsMap = {

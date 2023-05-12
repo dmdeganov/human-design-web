@@ -35,6 +35,18 @@
     opacity: 1;
     transition: opacity 0.2s;
   }
+  &__birth-time-buttons {
+    margin-top: auto;
+    align-self: stretch;
+    .outlined-button {
+      margin-top: unset;
+      margin-bottom: 25px;
+    }
+    .gradient-button {
+      margin-top: unset;
+    }
+
+  }
   .text-input {
     margin-bottom: 48px;
     width: 100%;
@@ -59,18 +71,6 @@
       .outlined-button {
         margin-top: auto;
       }
-    }
-    &__birth-time-buttons {
-      margin-top: auto;
-      align-self: stretch;
-      .outlined-button {
-        margin-top: unset;
-        margin-bottom: 25px;
-      }
-      .gradient-button {
-        margin-top: unset;
-      }
-
     }
   }
 }

@@ -1,12 +1,10 @@
-import React, {Dispatch, SetStateAction, useContext, useMemo, useRef} from 'react';
+import React, {Dispatch, SetStateAction, useMemo, useRef} from 'react';
 import {BackIcon, GatesCircleSVG, ZodiacCircleSVG} from '@/assets/svg';
-import {GradientButton} from '@/components';
 import {useTranslation} from 'react-i18next';
 import {Stage} from '@/pages/onboarding/types';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {mobileMaxWidth} from '@/static';
 import {chakrasMobileStyles} from '@/pages/onboarding/components/static';
-import {OnBoardingContext, OnBoardingContextI} from '@/pages/onboarding/OnBoarding';
 import {introSteps} from '@/pages/onboarding/components/intro';
 import {questionnaireSteps} from '@/pages/onboarding/components/questionnaire';
 
@@ -15,14 +13,14 @@ interface Props {
   stage: Stage;
   setStage: Dispatch<SetStateAction<Stage>>;
   setStep: Dispatch<SetStateAction<number>>;
-  children?: React.ReactElement<any> | null;
 }
+
 const stages = {
   intro: introSteps,
   questionnaire: questionnaireSteps,
 };
 
-const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setStage}) => {
+const OnBoardingLayout: React.FC<Props> = ({step, setStep, stage, setStage}) => {
   const {t} = useTranslation();
   const {windowWidth} = useWindowSize();
   const isMobileWidth = windowWidth <= mobileMaxWidth;
@@ -31,10 +29,9 @@ const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setS
   const Content = step in stages[stage] ? stages[stage][step] : null;
 
   const onBoardingContentRef = useRef<HTMLDivElement>(null);
-  const goForward = () => setStep(step + 1);
   const goBack = () => setStep(step - 1);
 
-  const onStepForward = () => {
+  const goForward = () => {
     const contentInner = onBoardingContentRef.current as HTMLDivElement;
     contentInner.style.opacity = '0';
     setTimeout(() => {
@@ -44,7 +41,7 @@ const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setS
         setStep(0);
         return;
       }
-      goForward();
+      setStep(step + 1);
     }, 200);
   };
   const isBackIconVisible = stage === 'questionnaire' && step > 0;
@@ -83,8 +80,7 @@ const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setS
         )}
         <div className="onboarding__content onboarding-content">
           <div className="onboarding-content__inner" ref={onBoardingContentRef}>
-            {Content && <Content onStepForward={onStepForward} />}
-            {/*{children && React.cloneElement(children, {onStepForward})}*/}
+            {Content && <Content goForward={goForward} />}
           </div>
         </div>
         <div className="onboarding__stepper stepper">
@@ -92,11 +88,6 @@ const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setS
             <div key={stepPoint} className={`stepper__dot${stepPoint === step ? ' stepper__dot--active' : ''}`} />
           ))}
         </div>
-        {/*{isMobileWidth && (*/}
-        {/*  <GradientButton onClick={onStepForward} disabled={disabledToContinue}>*/}
-        {/*    <span ref={buttonRef}>{t('common.next')}</span>*/}
-        {/*  </GradientButton>*/}
-        {/*)}*/}
       </div>
       {isMobileWidth && <div className="onboarding__gradient-ellipse" />}
     </main>

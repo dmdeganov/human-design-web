@@ -1,21 +1,26 @@
-import React, {useState} from 'react';
+import React, {useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import TextInput from '@/components/TextInput';
-import {OnBoardingContentProps} from "@/pages/onboarding/types";
-import {GradientButton} from "@/components";
+import {OnBoardingContentProps} from '@/pages/onboarding/types';
+import {GradientButton} from '@/components';
+import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 
-const Name = ({onStepForward}: OnBoardingContentProps) => {
+const Name = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
-  const [name, setName] = useState('');
+  const {userData: {name}, changeUserData } = useContext(UserDataContext); // prettier-ignore
 
   return (
     <>
-      <h1 >{t('onboarding.questionnaire.name.title')}</h1>
+      <h1>{t('onboarding.questionnaire.name.title')}</h1>
       <div className="onboarding-content__description">
         <p>{t('onboarding.questionnaire.name.description')}</p>
       </div>
-      <TextInput value={name} onChange={e => setName(e.target.value)} placeholder={t('onboarding.questionnaire.name.name') || ''}/>
-      <GradientButton onClick={onStepForward}>
+      <TextInput
+        value={name}
+        onChange={e => changeUserData('name', e.target.value)}
+        placeholder={t('onboarding.questionnaire.name.name') || ''}
+      />
+      <GradientButton onClick={goForward} disabled={name.length < 2}>
         {t('common.next')}
       </GradientButton>
     </>

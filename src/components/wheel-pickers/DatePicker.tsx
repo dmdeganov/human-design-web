@@ -1,13 +1,14 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Wheel from './Wheel';
 import {PickedDate} from './types';
-import {currentYear, dateConfig, months, years} from '@/components/wheel-pickers/static';
+import {dateConfig, months, years} from '@/components/wheel-pickers/static';
 import {getMemoizedIntegersArr, getNumberOfDaysInMonth} from '@/components/wheel-pickers/utils';
 interface DatePickerProps {
-  dateRef: React.MutableRefObject<PickedDate>;
+  dateRef: React.MutableRefObject<PickedDate & {isAnimationActive: boolean}>;
+  initialYearIndex: number;
 }
 
-const DatePicker = ({dateRef}: DatePickerProps) => {
+const DatePicker = ({dateRef, initialYearIndex}: DatePickerProps) => {
   const [days, setDays] = useState(getMemoizedIntegersArr(31));
 
   const onMonthChange = (pickedMonthIndex: number) => {
@@ -23,15 +24,15 @@ const DatePicker = ({dateRef}: DatePickerProps) => {
       ),
     );
   };
+
   return (
     <div className="slider-picker">
-      <Wheel type="day" slides={days} wheelWidth={250} resultRef={dateRef} />
-      <Wheel type="month" slides={months} onScrollEnd={onMonthChange} wheelWidth={400} resultRef={dateRef} />
+      <Wheel type="day" slides={days} resultRef={dateRef} />
+      <Wheel type="month" slides={months} onScrollEnd={onMonthChange} resultRef={dateRef} />
       <Wheel
         type="year"
-        initial={currentYear - dateConfig.minYear}
+        initial={initialYearIndex}
         slides={years}
-        wheelWidth={250}
         resultRef={dateRef}
         minIndex={dateConfig.minPickableYear - dateConfig.minYear}
         maxIndex={dateConfig.maxPickableYear - dateConfig.minYear}

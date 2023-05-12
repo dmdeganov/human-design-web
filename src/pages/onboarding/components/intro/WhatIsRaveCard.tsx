@@ -5,7 +5,7 @@ import {BodyGraphIcon} from "@/assets/svg";
 import {OnBoardingContentProps} from "@/pages/onboarding/types";
 import {GradientButton} from "@/components";
 
-const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
+const WhatIsHumanDesign = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
 
   return (
@@ -19,7 +19,7 @@ const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
         <p>{t('onboarding.intro.rave_card.description_second_line')}</p>
         <p>{t('onboarding.intro.rave_card.description_third_line')}</p>
       </div>
-      <GradientButton onClick={onStepForward}>
+      <GradientButton onClick={goForward}>
         {t('common.next')}
       </GradientButton>
     </>

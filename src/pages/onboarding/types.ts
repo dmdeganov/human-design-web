@@ -2,19 +2,28 @@ import React from 'react';
 
 export type Stage = 'intro' | 'questionnaire';
 export interface OnBoardingContentProps {
-  onStepForward: () => void;
+  goForward: () => void;
 }
 
 export interface UserDataI {
   gender: string;
   name: string;
-  birthDate: string;
-  birthTime: string;
+  birthDate: {
+    year: number;
+    monthIndex: number;
+    day: number;
+  } | null;
+  birthTime: {
+    hour: number;
+    minute: number;
+    period: string;
+  } | null;
   lat: number;
   lon: number;
   email: string;
 }
-export interface OnBoardingContextI {
+export type  ChangeUserDataFn = (fieldName: keyof UserDataI, value: string | number | {[key: string]: number | string}) => void
+export interface UserDataContextI {
   userData: UserDataI;
-  setUserData: React.Dispatch<React.SetStateAction<UserDataI>>;
+  changeUserData: ChangeUserDataFn;
 }

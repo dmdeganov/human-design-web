@@ -19,6 +19,8 @@ module.exports = {
     },
     plugins: ['@typescript-eslint', 'react', 'react-hooks', 'jsx-a11y'],
     rules: {
+        'object-curly-newline': 'off',
+        '@typescript-eslint/no-empty-function': 0,
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         'react/prop-types': 0,

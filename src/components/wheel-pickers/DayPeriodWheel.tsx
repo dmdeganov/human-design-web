@@ -1,15 +1,15 @@
-import React, {memo, useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useKeenSlider, TrackDetails} from 'keen-slider/react';
 import {PickedDate, PickedTime} from '@/components/wheel-pickers/types';
 import {WheelControls} from './plugins';
 import {getStyledSlides} from './utils';
-import WheelInner from "@/components/wheel-pickers/WheelInner";
+import WheelInner from '@/components/wheel-pickers/WheelInner';
 
 interface WheelProps {
-  resultRef: React.MutableRefObject<PickedDate | PickedTime>;
-  wheelWidth: number;
+  resultRef: React.MutableRefObject<(PickedDate | PickedTime) & {isAnimationActive: boolean}>;
 }
-export default function DayPeriodWheel({resultRef, wheelWidth}: WheelProps) {
+
+export default function DayPeriodWheel({resultRef}: WheelProps) {
   const slides = ['AM', 'PM'];
   const [styledSlides, setStyledSlides] = useState<Array<{value: number | string; style: React.CSSProperties}>>([]);
   const [sliderState, setSliderState] = React.useState<TrackDetails | null>(null);
@@ -30,7 +30,7 @@ export default function DayPeriodWheel({resultRef, wheelWidth}: WheelProps) {
       },
       animationEnded: s => {
         const pickedSlideIndex = s.track.details.rel;
-        const result = resultRef.current as {[key: string]: number | string};
+        const result = resultRef.current as {[key: string]: number | string | boolean};
         result.period = slides[pickedSlideIndex];
       },
     },
@@ -42,7 +42,7 @@ export default function DayPeriodWheel({resultRef, wheelWidth}: WheelProps) {
   }, [sliderState, slides.length]);
 
   return (
-    <div ref={sliderRef} className="keen-slider" >
+    <div ref={sliderRef} className="keen-slider">
       {(styledSlides.length ? styledSlides : getStyledSlides(sliderState, slides)).map(slide => {
         const {value, style} = slide;
         return (
