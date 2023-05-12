@@ -2,8 +2,10 @@ import React from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
 import {useTranslation} from 'react-i18next';
 import {BodyGraphIcon} from "@/assets/svg";
+import {OnBoardingContentProps} from "@/pages/onboarding/types";
+import {GradientButton} from "@/components";
 
-const WhatIsHumanDesign = () => {
+const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
 
   return (
@@ -17,6 +19,9 @@ const WhatIsHumanDesign = () => {
         <p>{t('onboarding.intro.rave_card.description_second_line')}</p>
         <p>{t('onboarding.intro.rave_card.description_third_line')}</p>
       </div>
+      <GradientButton onClick={onStepForward}>
+        {t('common.next')}
+      </GradientButton>
     </>
   );
 };

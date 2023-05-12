@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
 import {GenderIcon, FemaleIcon, MaleIcon, NonBinaryIcon} from '@/assets/svg';
 import {useTranslation} from 'react-i18next';
+import {OnBoardingContentProps} from "@/pages/onboarding/types";
+import {GradientButton} from "@/components";
 
 
-const WhatIsHumanDesign = () => {
+const WhatIsHumanDesign = ({onStepForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
+
   return (
     <>
       <BlackGradientTile>
@@ -29,6 +32,9 @@ const WhatIsHumanDesign = () => {
           {t('onboarding.intro.gender.non_binary')}
         </button>
       </div>
+      <GradientButton onClick={onStepForward}>
+        {t('common.next')}
+      </GradientButton>
     </>
   );
 };

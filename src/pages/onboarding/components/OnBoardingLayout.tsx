@@ -1,4 +1,4 @@
-import React, {Dispatch, SetStateAction, useMemo, useRef} from 'react';
+import React, {Dispatch, SetStateAction, useContext, useMemo, useRef} from 'react';
 import {BackIcon, GatesCircleSVG, ZodiacCircleSVG} from '@/assets/svg';
 import {GradientButton} from '@/components';
 import {useTranslation} from 'react-i18next';
@@ -6,37 +6,39 @@ import {Stage} from '@/pages/onboarding/types';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {mobileMaxWidth} from '@/static';
 import {chakrasMobileStyles} from '@/pages/onboarding/components/static';
-import {createSecretKey} from 'crypto';
+import {OnBoardingContext, OnBoardingContextI} from '@/pages/onboarding/OnBoarding';
+import {introSteps} from '@/pages/onboarding/components/intro';
+import {questionnaireSteps} from '@/pages/onboarding/components/questionnaire';
 
 interface Props {
-  stepsAmount: number;
   step: number;
   stage: Stage;
   setStage: Dispatch<SetStateAction<Stage>>;
   setStep: Dispatch<SetStateAction<number>>;
-  children?: React.ReactNode;
+  children?: React.ReactElement<any> | null;
 }
+const stages = {
+  intro: introSteps,
+  questionnaire: questionnaireSteps,
+};
 
-const OnBoardingLayout: React.FC<Props> = ({stepsAmount, step, setStep, children, stage, setStage}) => {
+const OnBoardingLayout: React.FC<Props> = ({step, setStep, children, stage, setStage}) => {
   const {t} = useTranslation();
   const {windowWidth} = useWindowSize();
   const isMobileWidth = windowWidth <= mobileMaxWidth;
+  const stepsAmount = Object.keys(stages[stage]).length;
   const stepPoints = useMemo(() => new Array(stepsAmount).fill(null).map((_, index) => index), [stepsAmount]);
+  const Content = step in stages[stage] ? stages[stage][step] : null;
 
   const onBoardingContentRef = useRef<HTMLDivElement>(null);
-  const buttonRef = useRef<HTMLButtonElement>(null);
   const goForward = () => setStep(step + 1);
   const goBack = () => setStep(step - 1);
 
   const onStepForward = () => {
     const contentInner = onBoardingContentRef.current as HTMLDivElement;
-    const button = buttonRef.current as HTMLButtonElement;
-
     contentInner.style.opacity = '0';
-    button.style.opacity = '0';
     setTimeout(() => {
       contentInner.style.opacity = '1';
-      button.style.opacity = '1';
       if (stage === 'intro' && step === stepsAmount - 1) {
         setStage('questionnaire');
         setStep(0);
@@ -55,7 +57,6 @@ const OnBoardingLayout: React.FC<Props> = ({stepsAmount, step, setStep, children
       contentInner.style.opacity = '1';
     }, 200);
   };
-  const disabledToContinue = step === stepsAmount - 1 && stage === 'questionnaire';
 
   const getChakrasMobileStyles = (): React.CSSProperties => {
     if (stage !== 'questionnaire' || step === 0 || !isMobileWidth) return {};
@@ -65,8 +66,6 @@ const OnBoardingLayout: React.FC<Props> = ({stepsAmount, step, setStep, children
       top: `calc(${top}% - 1230px*${(100 - top) / 100}/2)`,
     };
   };
-
-  console.log(getChakrasMobileStyles());
 
   return (
     <main className="onboarding">
@@ -84,25 +83,20 @@ const OnBoardingLayout: React.FC<Props> = ({stepsAmount, step, setStep, children
         )}
         <div className="onboarding__content onboarding-content">
           <div className="onboarding-content__inner" ref={onBoardingContentRef}>
-            {children}
-            {/*<h2>step {step}</h2>*/}
+            {Content && <Content onStepForward={onStepForward} />}
+            {/*{children && React.cloneElement(children, {onStepForward})}*/}
           </div>
-          {!isMobileWidth && (
-            <GradientButton onClick={onStepForward} disabled={disabledToContinue}>
-              <span ref={buttonRef}>{t('common.next')}</span>
-            </GradientButton>
-          )}
         </div>
         <div className="onboarding__stepper stepper">
           {stepPoints.map(stepPoint => (
             <div key={stepPoint} className={`stepper__dot${stepPoint === step ? ' stepper__dot--active' : ''}`} />
           ))}
         </div>
-        {isMobileWidth && (
-          <GradientButton onClick={onStepForward} disabled={disabledToContinue}>
-            <span ref={buttonRef}>{t('common.next')}</span>
-          </GradientButton>
-        )}
+        {/*{isMobileWidth && (*/}
+        {/*  <GradientButton onClick={onStepForward} disabled={disabledToContinue}>*/}
+        {/*    <span ref={buttonRef}>{t('common.next')}</span>*/}
+        {/*  </GradientButton>*/}
+        {/*)}*/}
       </div>
       {isMobileWidth && <div className="onboarding__gradient-ellipse" />}
     </main>

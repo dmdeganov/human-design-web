@@ -1,31 +1,27 @@
 import React, {useState} from 'react';
-import {useTranslation} from 'react-i18next';
-import {OnBoardingLayout, introSteps, questionnaireSteps} from './components';
-import {Stage} from '@/pages/onboarding/types';
+import {OnBoardingLayout} from './components';
+import {OnBoardingContextI, Stage, UserDataI} from '@/pages/onboarding/types';
 
-const stages = {
-  intro: introSteps,
-  questionnaire: questionnaireSteps,
+const userDataInitialState = {
+  gender: '',
+  name: '',
+  birthDate: '',
+  birthTime: '',
+  lat: 0,
+  lon: 0,
+  email: '',
 };
+export const OnBoardingContext = React.createContext<OnBoardingContextI | null>(null);
 
 const OnBoarding = () => {
   const [stage, setStage] = useState<Stage>('intro');
   const [step, setStep] = useState<number>(0);
-  const stepsAmount = Object.keys(stages[stage]).length;
-  const Content = step in stages[stage] ? stages[stage][step] : null;
-
-  const {t} = useTranslation();
+  const [userData, setUserData] = useState<UserDataI>(userDataInitialState);
 
   return (
-    <OnBoardingLayout
-      stepsAmount={stepsAmount}
-      step={step}
-      setStep={setStep}
-      stage={stage}
-      setStage={setStage}
-    >
-      {Content && <Content />}
-    </OnBoardingLayout>
+    <OnBoardingContext.Provider value={{userData, setUserData}}>
+      <OnBoardingLayout step={step} setStep={setStep} stage={stage} setStage={setStage} />
+    </OnBoardingContext.Provider>
   );
 };
 

@@ -12,6 +12,7 @@ export const questionnaire = {
     title: 'Time of birth',
     description:
       'It will show the exact location of the planets and stars at the time of your birth, which is important for calculating the card.',
+    dont_know: 'I don\'t know for sure'
   },
   birth_place: {
     title: 'Place of birth',
