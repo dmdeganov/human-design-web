@@ -1,5 +1,13 @@
+@keyframes opacity-animated {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
 .onboarding-content {
-  max-width: 335px;
   animation: opacity-animated 0.5s linear;
 
   .black-gradient-icon {
@@ -27,22 +35,27 @@
     opacity: 1;
     transition: opacity 0.2s;
   }
-  .text-input{
+  .text-input {
     margin-bottom: 48px;
     width: 100%;
   }
-  .slider-picker{
+  .slider-picker {
     margin-bottom: 48px;
     min-width: 335px;
   }
 }
 
-
-@keyframes opacity-animated {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+@media only screen and (max-width: 576px) {
+  .onboarding-content {
+    flex-grow: 1;
+    &__inner {
+      height: 100%;
+      .text-input {
+        margin-top: auto;
+      }
+      .outlined-button{
+        margin-top: auto;
+      }
+    }
   }
 }

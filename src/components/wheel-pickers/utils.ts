@@ -42,10 +42,6 @@ export const getStyledSlides = (sliderState: TrackDetails | null, slides: Array<
     const distanceFromCenter = Math.abs(
       indicesDiff < Math.abs(slides.length - 3) ? indicesDiff : indicesDiff - slides.length,
     );
-    if (i === 0) {
-      console.log(distanceFromCenter);
-    }
-
     let style: React.CSSProperties = {
       transform: `scale(0.75)  translateX(-16.67%)`,
     };

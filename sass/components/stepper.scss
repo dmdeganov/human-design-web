@@ -14,8 +14,13 @@ $stepper-bottom: 11vh;
     background-color: $white;
     opacity: 0.2;
     transition: all 0.2s;
-    &--active{
+    &--active {
       opacity: 1;
     }
+  }
+}
+@media only screen and (max-width: 576px) {
+  .stepper{
+    bottom: 22px;
   }
 }

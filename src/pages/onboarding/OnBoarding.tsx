@@ -11,8 +11,6 @@ const stages = {
 const OnBoarding = () => {
   const [stage, setStage] = useState<Stage>('intro');
   const [step, setStep] = useState<number>(0);
-  const goForward = () => setStep(step + 1);
-  const goBack = () => setStep(step - 1);
   const stepsAmount = Object.keys(stages[stage]).length;
   const Content = step in stages[stage] ? stages[stage][step] : null;
 
@@ -21,9 +19,8 @@ const OnBoarding = () => {
   return (
     <OnBoardingLayout
       stepsAmount={stepsAmount}
-      currentStep={step}
-      goForward={goForward}
-      goBack={goBack}
+      step={step}
+      setStep={setStep}
       stage={stage}
       setStage={setStage}
     >

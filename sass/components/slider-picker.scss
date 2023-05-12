@@ -28,5 +28,8 @@
     transform: translateY(-50%);
     background: #3a3a3d;
     border-radius: 10px;
+    @media only screen and (max-width: 576px) {
+      background: rgba(120, 120, 128, 0.32);
+    }
   }
 }

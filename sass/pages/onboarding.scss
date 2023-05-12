@@ -1,15 +1,43 @@
 $outer-chakra-diameter--desktop: 120vh;
 $inner-chakra-diameter--desktop: calc(#{$outer-chakra-diameter--desktop}* 0.82);
-//$gradient-circle-diameter: 62vh;
+
+$outer-chakra-diameter--mobile: 1230px;
+$inner-chakra-diameter--mobile: calc(#{$outer-chakra-diameter--mobile}* 0.82);
+$inner-chakra-offset--mobile: calc((#{$outer-chakra-diameter--mobile} - #{$inner-chakra-diameter--mobile}) / 2);
+
 $gradient-circle-diameter: 44vw;
 
+$gradient-ellipse-width: calc(1.5 * 100vw);
+$gradient-ellipse-height: calc(0.458 * 100vh);
+$gradient-ellipse-bottom: calc(#{$gradient-ellipse-height} * (-0.92));
+$gradient-ellipse-left: calc(#{$gradient-ellipse-height} * (-0.94));
+$gradient-ellipse-border-radius: calc(#{$gradient-ellipse-width} * (1.84));
+$gradient-ellipse-blur: calc(#{$gradient-ellipse-height} * (0.3));
+
+@keyframes rotating-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotating-counter-clockwise {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+
 .onboarding {
-  background: linear-gradient(0deg, #0e0e0f, #0e0e0f), #ffffff;
+  background: #0e0e0f;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   position: relative;
-  height: 100vh;
+  height: 100%;
   &__chakras {
     height: 100%;
     width: 100%;
@@ -19,7 +47,7 @@ $gradient-circle-diameter: 44vw;
   &__gradient-circle {
     width: $gradient-circle-diameter;
     height: $gradient-circle-diameter;
-    left: calc(-#{$gradient-circle-diameter} *0.55);
+    left: calc(-#{$gradient-circle-diameter} * 0.55);
     top: calc((100% - #{$gradient-circle-diameter}) / 2);
     position: absolute;
     opacity: 0.48;
@@ -29,8 +57,7 @@ $gradient-circle-diameter: 44vw;
     &--right {
       background: linear-gradient(90deg, #4d8dbc 0%, #5352bd 100%, #5352bd 100%);
       left: unset;
-      right: calc(-#{$gradient-circle-diameter} *0.55);
-
+      right: calc(-#{$gradient-circle-diameter} * 0.55);
     }
   }
   &__outer-chakra {
@@ -54,38 +81,85 @@ $gradient-circle-diameter: 44vw;
     //top: calc(50% - 495px);
     //left: calc(50% - 495px);
   }
-  &__content{
+  &__content {
+    max-width: 335px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-  &__back-icon{
+  &__back-icon {
     position: absolute;
     z-index: 10;
     left: 40px;
     top: 40px;
     cursor: pointer;
     transition: all 0.2s;
-    &:active{
+    &:active {
       transform: scale(0.95);
     }
   }
 }
+@media only screen and (max-width: 576px) {
+  .onboarding {
+    &__inner {
+      height: 100%;
+      padding: 67px 20px 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
 
-@keyframes rotating-clockwise {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+    &__content {
+      max-width: unset;
+      position: relative;
+      top: unset;
+      left: unset;
+      transform: unset;
+    }
+    &__chakras {
+      left: calc(-1 * (#{$outer-chakra-diameter--mobile}/ 2 - 50vw));
+      top: 81%;
+      height: 1230px;
+      width: 1230px;
+      position: absolute;
+      opacity: 0.2;
+      transition: all 1.5s;
+    }
+    &__outer-chakra {
+      width: $outer-chakra-diameter--mobile;
+      height: $outer-chakra-diameter--mobile;
+      top: unset;
+      left: unset;
+    }
+
+    &__inner-chakra {
+      position: absolute;
+      width: $inner-chakra-diameter--mobile;
+      height: $inner-chakra-diameter--mobile;
+      top: $inner-chakra-offset--mobile;
+      left: $inner-chakra-offset--mobile;
+    }
+    .gradient-button {
+      z-index: 10;
+    }
+    &__gradient-ellipse {
+      height: $gradient-ellipse-height;
+      width: $gradient-ellipse-width;
+      position: absolute;
+      left: calc(-1 * (#{$gradient-ellipse-width}/ 2 - 50vw));
+      bottom: $gradient-ellipse-bottom;
+      background: linear-gradient(90deg, #4D8DBC 0%, #5352BD 100%, #5352BD 100%);
+      opacity: 0.48;
+      filter: blur($gradient-ellipse-blur);
+      border-radius: $gradient-ellipse-border-radius;
+    }
+    &__back-icon {
+      left: 20px;
+      top: 20px;
+    }
   }
 }
-@keyframes rotating-counter-clockwise {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(-360deg);
-  }
+*{
+
 }
