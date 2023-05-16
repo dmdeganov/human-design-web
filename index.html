@@ -4,10 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React + TS</title>
+    <title>Human Design</title>
   </head>
   <body>
     <div id="root"></div>
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCCdDXKTTQ4vY5DRfHm2BZfaqEBfGHR4cM&libraries=places"
+      defer
+    ></script>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!--    <script>-->
+    <!--      function initMap() {} // now it IS a function and it is in global-->
+
+    <!--      (() => {-->
+    <!--        initMap = function () {-->
+    <!--          // your code like...-->
+    <!--          var map = new google.maps.Map(document.getElementById('map'), {-->
+    <!--            /*your code*/-->
+    <!--          });-->
+    <!--          // and other stuff...-->
+    <!--        };-->
+    <!--      })();-->
+    <!--    </script>-->
   </body>
 </html>

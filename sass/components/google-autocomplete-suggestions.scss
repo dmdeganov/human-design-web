@@ -1,0 +1,35 @@
+.pac-container {
+  margin-top: 24px;
+  left: 16px !important;
+  background: transparent;
+  width: calc(100% - 32px) !important;
+  border-top: none;
+  box-shadow: none;
+}
+.pac-item,
+.pac-item-query,
+.pac-matched {
+  color: $white;
+  font-size: 16px;
+  font-family: 'SF Pro', sans-serif;
+  font-weight: 400;
+}
+.pac-item-query {
+  margin-right: 4px;
+  &:after {
+    content: ',';
+  }
+}
+.pac-item {
+  border-top: none;
+  border-radius: 5px;
+  &:hover {
+    background: rgba(118, 118, 128, 0.24);
+  }
+  .pac-icon-marker {
+    display: none;
+  }
+}
+.pac-container.pac-logo.hdpi:after {
+  display: none;
+}

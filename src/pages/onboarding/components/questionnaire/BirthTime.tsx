@@ -21,7 +21,10 @@ const Birthtime = ({goForward}: OnBoardingContentProps) => {
     const {hour, minute, period, isAnimationActive} = timeRef.current;
     console.log({hour, minute, period, isAnimationActive});
     changeUserData('birthTime', {hour, minute, period});
-    // goForward();
+    goForward();
+  };
+  const skipFillingBirthTime = () => {
+    goForward();
   };
 
   return (
@@ -32,7 +35,9 @@ const Birthtime = ({goForward}: OnBoardingContentProps) => {
       </div>
       <TimePicker timeRef={timeRef} />
       <div className="onboarding-content__birth-time-buttons">
-        <OutlinedButton>{t('onboarding.questionnaire.birth_time.dont_know')}</OutlinedButton>
+        <OutlinedButton onClick={skipFillingBirthTime}>
+          {t('onboarding.questionnaire.birth_time.dont_know')}
+        </OutlinedButton>
         <GradientButton onClick={onTimeConfirm}>{t('common.next')}</GradientButton>
       </div>
     </>

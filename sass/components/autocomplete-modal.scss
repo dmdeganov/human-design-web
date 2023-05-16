@@ -1,0 +1,12 @@
+.autocomplete-modal {
+  &__header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 0;
+    flex-grow: 1;
+  }
+  &__back {
+    position: relative;
+    left: -8px;
+  }
+}

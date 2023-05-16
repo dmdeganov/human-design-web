@@ -7,8 +7,11 @@ const userDataInitialState = {
   name: '',
   birthDate: null,
   birthTime: null,
-  lat: 0,
-  lon: 0,
+  birthPlace: {
+    lat: 0,
+    lon: 0,
+    name: '',
+  },
   email: '',
 };
 export const UserDataContext = React.createContext<UserDataContextI>({
@@ -16,11 +19,9 @@ export const UserDataContext = React.createContext<UserDataContextI>({
   changeUserData: (fieldName, value) => {},
 });
 
-type Field = keyof UserDataI;
-
 const OnBoarding = () => {
   const [stage, setStage] = useState<Stage>('questionnaire');
-  const [step, setStep] = useState<number>(1);
+  const [step, setStep] = useState<number>(3);
   const [userData, setUserData] = useState<UserDataI>(userDataInitialState);
   const changeUserData: ChangeUserDataFn = (fieldName, value) => setUserData(user => ({...user, [fieldName]: value}));
 

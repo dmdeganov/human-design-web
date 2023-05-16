@@ -14,7 +14,7 @@ const Email = ({goForward}: OnBoardingContentProps) => {
       <div className="onboarding-content__description">
         <p>{t('onboarding.questionnaire.email.description')}</p>
       </div>
-      <TextInput value={email} onChange={e => setEmail(e.target.value)} placeholder={t('onboarding.questionnaire.email.input_placeholder') || ''}/>
+      <TextInput type='email' value={email} onChange={e => setEmail(e.target.value)} placeholder={t('onboarding.questionnaire.email.input_placeholder') || ''}/>
       <GradientButton onClick={goForward}>
         {t('common.next')}
       </GradientButton>

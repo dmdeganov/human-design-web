@@ -18,10 +18,15 @@ export interface UserDataI {
     minute: number;
     period: string;
   } | null;
-  lat: number;
-  lon: number;
+  birthPlace: {
+    lat: number;
+    lon: number;
+    name: string
+  }
   email: string;
 }
+export type BirthPlaceType = UserDataI['birthPlace'];
+
 export type  ChangeUserDataFn = (fieldName: keyof UserDataI, value: string | number | {[key: string]: number | string}) => void
 export interface UserDataContextI {
   userData: UserDataI;

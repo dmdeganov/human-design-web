@@ -1,0 +1,37 @@
+.modal {
+  position: fixed;
+  inset: 0; /* inset sets all 4 values (top right bottom left) much like how we set padding, margin etc., */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.1s ease-in-out;
+  overflow: hidden;
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(100%);
+
+  .modal__content {
+    background: var(--background-dark);
+    color: #fff;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    &--fullscreen{
+      width: 100%;
+      height: 100%;
+      justify-content: space-between;
+    }
+  }
+}
+
+.modal-enter-done {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+}
+.modal-exit {
+  opacity: 0;
+  transform: translateX(100%);
+}

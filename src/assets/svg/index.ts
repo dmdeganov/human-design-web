@@ -7,4 +7,5 @@ export {ReactComponent as HumanDesignIcon} from '@/assets/svg/hd.svg';
 export {ReactComponent as GatesCircleSVG} from '@/assets/svg/gates-circle.svg';
 export {ReactComponent as ZodiacCircleSVG} from '@/assets/svg/zodiac-circle.svg';
 export {ReactComponent as BackIcon} from '@/assets/svg/back.svg';
+export {ReactComponent as MagnifyIcon} from '@/assets/svg/magnify.svg';
 
