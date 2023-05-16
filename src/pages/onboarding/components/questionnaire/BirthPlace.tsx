@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {FormEventHandler, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import TextInput from '@/components/TextInput';
 import {BirthPlaceType, OnBoardingContentProps} from '@/pages/onboarding/types';
@@ -17,11 +17,15 @@ const BirthPlace = ({goForward}: OnBoardingContentProps) => {
     changeUserData('birthPlace', birthPlaceInfo);
     close();
   };
-  const ableToContinue = birthPlace.lat && birthPlace.lon && birthPlace.name
+  const isAbleToContinue = birthPlace.lat && birthPlace.lon && birthPlace.name;
 
+  const onSubmit : FormEventHandler<HTMLFormElement> = (e ) => {
+    e.preventDefault();
+    if(isAbleToContinue) goForward()
+  };
 
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <h1>{t('onboarding.questionnaire.birth_place.title')}</h1>
       <div className="onboarding-content__description">
         <p>{t('onboarding.questionnaire.birth_place.description')}</p>
@@ -32,14 +36,14 @@ const BirthPlace = ({goForward}: OnBoardingContentProps) => {
         onFocus={open}
         placeholder={t('onboarding.questionnaire.birth_place.input_placeholder') || ''}
       />
-      <GradientButton onClick={goForward} disabled={!ableToContinue}>{t('common.next')}</GradientButton>
+      <GradientButton onClick={goForward} disabled={!isAbleToContinue}>{t('common.next')}</GradientButton>
       <Modal close={() => close()} isOpen={isOpen} fullScreenContent className="autocomplete-modal">
         <div className="autocomplete-modal__header">
           <BackIcon className="autocomplete-modal__back" onClick={close} />
           <AutoComplete placeholder="Search" onSelect={onSelectPlace} focusOnMount />
         </div>
       </Modal>
-    </>
+    </form>
   );
 };
 

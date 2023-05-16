@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {FormEventHandler, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import TextInput from '@/components/TextInput';
 import {OnBoardingContentProps} from '@/pages/onboarding/types';
@@ -8,9 +8,13 @@ import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 const Name = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
   const {userData: {name}, changeUserData } = useContext(UserDataContext); // prettier-ignore
-
+  const isAbleToContinue = name.length >= 2
+  const onSubmit : FormEventHandler<HTMLFormElement> = (e ) => {
+    e.preventDefault();
+    if(isAbleToContinue) goForward()
+  };
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <h1>{t('onboarding.questionnaire.name.title')}</h1>
       <div className="onboarding-content__description">
         <p>{t('onboarding.questionnaire.name.description')}</p>
@@ -23,7 +27,7 @@ const Name = ({goForward}: OnBoardingContentProps) => {
       <GradientButton onClick={goForward} disabled={name.length < 2}>
         {t('common.next')}
       </GradientButton>
-    </>
+    </form>
   );
 };
 

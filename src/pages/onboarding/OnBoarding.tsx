@@ -14,14 +14,11 @@ const userDataInitialState = {
   },
   email: '',
 };
-export const UserDataContext = React.createContext<UserDataContextI>({
-  userData: userDataInitialState,
-  changeUserData: (fieldName, value) => {},
-});
+export const UserDataContext = React.createContext<UserDataContextI>({} as UserDataContextI);
 
 const OnBoarding = () => {
   const [stage, setStage] = useState<Stage>('questionnaire');
-  const [step, setStep] = useState<number>(3);
+  const [step, setStep] = useState<number>(0);
   const [userData, setUserData] = useState<UserDataI>(userDataInitialState);
   const changeUserData: ChangeUserDataFn = (fieldName, value) => setUserData(user => ({...user, [fieldName]: value}));
 
