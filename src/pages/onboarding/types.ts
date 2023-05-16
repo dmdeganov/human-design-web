@@ -16,7 +16,7 @@ export interface UserDataI {
   birthTime: {
     hour: number;
     minute: number;
-    period: string;
+    period: 'AM' | 'PM';
   } | null;
   birthPlace: {
     lat: number;
@@ -27,7 +27,7 @@ export interface UserDataI {
 }
 export type BirthPlaceType = UserDataI['birthPlace'];
 
-export type  ChangeUserDataFn = (fieldName: keyof UserDataI, value: string | number | {[key: string]: number | string}) => void
+export type  ChangeUserDataFn = (fieldName: keyof UserDataI, value: UserDataI[typeof fieldName]) => void
 export interface UserDataContextI {
   userData: UserDataI;
   changeUserData: ChangeUserDataFn;

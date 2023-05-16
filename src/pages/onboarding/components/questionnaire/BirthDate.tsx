@@ -9,19 +9,21 @@ import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 
 const BirthDate = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
-  const {changeUserData } = useContext(UserDataContext); // prettier-ignore
+  const {changeUserData, userData: {birthDate} } = useContext(UserDataContext); // prettier-ignore
+  const {year, monthIndex, day} = birthDate || {};
+  console.log({year, monthIndex, day});
 
   const dateRef = useRef<PickedDate & {isAnimationActive: boolean}>({
-    day: 1,
-    month: months[0],
-    year: initialYear,
+    day: day || 1,
+    month: monthIndex ? months[monthIndex] : months[0],
+    year: year || initialYear,
     isAnimationActive: false,
   });
+
   const onDateConfirm = () => {
     if (dateRef.current.isAnimationActive) return;
     const {year, month, day} = dateRef.current;
-    console.log({year, month, day})
-    changeUserData('birthDate', {year, month, day});
+    changeUserData('birthDate', {year, monthIndex: months.findIndex(m => m === month), day});
     goForward();
   };
 
@@ -33,11 +35,11 @@ const BirthDate = ({goForward}: OnBoardingContentProps) => {
       </div>
       <DatePicker
         dateRef={dateRef}
-        initialYearIndex={initialYear - dateConfig.minYear}
+        initialYearIndex={year ? year - dateConfig.minYear : initialYear - dateConfig.minYear}
+        initialMonthIndex={monthIndex}
+        initialDayIndex={day && day - 1}
       />
-      <GradientButton onClick={onDateConfirm} >
-        {t('common.next')}
-      </GradientButton>
+      <GradientButton onClick={onDateConfirm}>{t('common.next')}</GradientButton>
     </>
   );
 };

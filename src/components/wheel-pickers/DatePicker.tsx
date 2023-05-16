@@ -6,9 +6,11 @@ import {getMemoizedIntegersArr, getNumberOfDaysInMonth} from '@/components/wheel
 interface DatePickerProps {
   dateRef: React.MutableRefObject<PickedDate & {isAnimationActive: boolean}>;
   initialYearIndex: number;
+  initialMonthIndex?: number;
+  initialDayIndex?: number;
 }
 
-const DatePicker = ({dateRef, initialYearIndex}: DatePickerProps) => {
+const DatePicker = ({dateRef, initialYearIndex, initialMonthIndex = 0, initialDayIndex = 0}: DatePickerProps) => {
   const [days, setDays] = useState(getMemoizedIntegersArr(31));
 
   const onMonthChange = (pickedMonthIndex: number) => {
@@ -27,8 +29,8 @@ const DatePicker = ({dateRef, initialYearIndex}: DatePickerProps) => {
 
   return (
     <div className="slider-picker">
-      <Wheel type="day" slides={days} resultRef={dateRef} />
-      <Wheel type="month" slides={months} onScrollEnd={onMonthChange} resultRef={dateRef} />
+      <Wheel type="day" slides={days} resultRef={dateRef} initial={initialDayIndex}/>
+      <Wheel type="month" slides={months} onScrollEnd={onMonthChange} resultRef={dateRef} initial={initialMonthIndex}/>
       <Wheel
         type="year"
         initial={initialYearIndex}

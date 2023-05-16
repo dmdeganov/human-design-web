@@ -9,17 +9,18 @@ import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 
 const Birthtime = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
-  const { changeUserData } = useContext(UserDataContext); // prettier-ignore
+  const { changeUserData, userData: {birthTime} } = useContext(UserDataContext); // prettier-ignore
+  const {hour, minute, period} = birthTime || {};
+
   const timeRef = useRef<PickedTime & {isAnimationActive: boolean}>({
-    hour: 12,
-    minute: 0,
-    period: 'AM',
+    hour: hour || 12,
+    minute: minute || 0,
+    period: period || 'AM',
     isAnimationActive: false,
   });
   const onTimeConfirm = () => {
     if (timeRef.current.isAnimationActive) return;
-    const {hour, minute, period, isAnimationActive} = timeRef.current;
-    console.log({hour, minute, period, isAnimationActive});
+    const {hour, minute, period} = timeRef.current;
     changeUserData('birthTime', {hour, minute, period});
     goForward();
   };
@@ -33,7 +34,12 @@ const Birthtime = ({goForward}: OnBoardingContentProps) => {
       <div className="onboarding-content__description">
         <p>{t('onboarding.questionnaire.birth_time.description')}</p>
       </div>
-      <TimePicker timeRef={timeRef} />
+      <TimePicker
+        timeRef={timeRef}
+        initialHourIndex={hour && hour - 1}
+        initialMinuteIndex={minute}
+        initialPeriodIndex={period && period === 'AM' ? 0 : 1}
+      />
       <div className="onboarding-content__birth-time-buttons">
         <OutlinedButton onClick={skipFillingBirthTime}>
           {t('onboarding.questionnaire.birth_time.dont_know')}

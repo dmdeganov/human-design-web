@@ -7,9 +7,10 @@ import WheelInner from '@/components/wheel-pickers/WheelInner';
 
 interface WheelProps {
   resultRef: React.MutableRefObject<(PickedDate | PickedTime) & {isAnimationActive: boolean}>;
+  initial: number;
 }
 
-export default function DayPeriodWheel({resultRef}: WheelProps) {
+export default function DayPeriodWheel({resultRef, initial}: WheelProps) {
   const slides = ['AM', 'PM'];
   const [styledSlides, setStyledSlides] = useState<Array<{value: number | string; style: React.CSSProperties}>>([]);
   const [sliderState, setSliderState] = React.useState<TrackDetails | null>(null);
@@ -20,6 +21,7 @@ export default function DayPeriodWheel({resultRef}: WheelProps) {
         perView: 7,
         spacing: 10,
       },
+      initial,
       dragSpeed: 0.6,
       vertical: true,
       loop: false,

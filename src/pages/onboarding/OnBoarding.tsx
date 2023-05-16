@@ -2,17 +2,37 @@ import React, {useState} from 'react';
 import {OnBoardingLayout} from './components';
 import {UserDataContextI, Stage, UserDataI, ChangeUserDataFn} from '@/pages/onboarding/types';
 
+// const userDataInitialState = {
+//   gender: '',
+//   name: '',
+//   birthDate: null,
+//   birthTime: null,
+//   birthPlace: {
+//     lat: 0,
+//     lon: 0,
+//     name: '',
+//   },
+//   email: '',
+// };
 const userDataInitialState = {
   gender: '',
-  name: '',
-  birthDate: null,
-  birthTime: null,
-  birthPlace: {
-    lat: 0,
-    lon: 0,
-    name: '',
+  name: 'james',
+  birthDate: {
+    year: 1991,
+    monthIndex: 10,
+    day: 14,
   },
-  email: '',
+  birthTime: {
+    hour: 7,
+    minute: 30,
+    period: 'AM',
+  },
+  birthPlace: {
+    lat: 55.755826,
+    lon: 37.6173,
+    name: 'Москва, Россия',
+  },
+  email: 'adsfasdf@dsfsdf',
 };
 export const UserDataContext = React.createContext<UserDataContextI>({} as UserDataContextI);
 
