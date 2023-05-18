@@ -1,0 +1,6 @@
+.head {
+  justify-content: flex-end;
+  & > div {
+    padding: 0 16px;
+  }
+}

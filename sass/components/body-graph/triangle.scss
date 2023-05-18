@@ -1,0 +1,18 @@
+.triangle {
+  background-color: $shape-bg-primary;
+  width: $triangle-width;
+  height: $triangle-height;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  &--up {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+  &--down {
+    clip-path: polygon(50% 100%, 0 0, 100% 0);
+  }
+span{
+  width: 14px;
+  text-align: center;
+}
+}

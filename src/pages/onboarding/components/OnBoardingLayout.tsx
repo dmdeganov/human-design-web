@@ -1,7 +1,7 @@
 import React, {Dispatch, SetStateAction, useMemo, useRef} from 'react';
 import {BackIcon, GatesCircleSVG, ZodiacCircleSVG} from '@/assets/svg';
 import {useTranslation} from 'react-i18next';
-import {Stage} from '@/pages/onboarding/types';
+import {Stage} from '@/types/@onboarding';
 import {useWindowSize} from '@/hooks/useWindowSize';
 import {mobileMaxWidth} from '@/static';
 import {chakrasMobileStyles} from '@/pages/onboarding/components/static';

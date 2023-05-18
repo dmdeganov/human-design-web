@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import useGooglePlaceAutoComplete from '@/hooks/useGooglePlaceAutoComplete';
 import {MagnifyIcon} from '@/assets/svg';
-import {BirthPlaceType} from '@/pages/onboarding/types';
+import {BirthPlaceType} from '@/types/@onboarding';
 import birthPlace from '@/pages/onboarding/components/questionnaire/BirthPlace';
 
 interface Props {

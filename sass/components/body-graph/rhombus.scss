@@ -1,0 +1,8 @@
+.rhombus{
+  width: $rombus-wrapper-side-length;
+  height: $rombus-wrapper-side-length;
+  clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+  background-color: $shape-bg-primary;
+  display: flex;
+  flex-direction: column;
+}

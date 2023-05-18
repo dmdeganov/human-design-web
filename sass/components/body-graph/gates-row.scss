@@ -1,0 +1,9 @@
+.gates-row{
+  display: flex;
+  justify-content: space-between;
+}
+.gates-column{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}

@@ -2,6 +2,16 @@
   color: #FFFFFF;
   opacity: 0.7;
 }
-@mixin test {
-  border: 1px solid orangered;
+
+@mixin square-four-rows-gates{
+  & > div:nth-of-type(1), div:nth-of-type(4) {
+    padding: 0 12px;
+  }
+  & > div:nth-of-type(2), & > div:nth-of-type(3) {
+    padding: 0 4px;
+  }
+  span{
+    width: 14px;
+    text-align: center;
+  }
 }

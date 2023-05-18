@@ -3,6 +3,7 @@ function padTo2Digits(num: number) {
 }
 
 export function formatDate(date: Date) {
+  console.log(date.toString())
   return (
     [date.getFullYear(), padTo2Digits(date.getMonth() + 1), padTo2Digits(date.getDate())].join('-') +
     ' ' +

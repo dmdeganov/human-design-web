@@ -2,7 +2,7 @@ import React, {useContext, useState} from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
 import {GenderIcon, FemaleIcon, MaleIcon, NonBinaryIcon} from '@/assets/svg';
 import {useTranslation} from 'react-i18next';
-import {OnBoardingContentProps} from '@/pages/onboarding/types';
+import {OnBoardingContentProps} from '@/types/@onboarding';
 import {GradientButton} from '@/components';
 import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 

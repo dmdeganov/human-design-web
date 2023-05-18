@@ -1,0 +1,9 @@
+.square {
+  width: $square-side-length;
+  height: $square-side-length;
+  background-color: $shape-bg-primary;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+justify-content: space-between;
+}

@@ -1,0 +1,18 @@
+.triangle-big {
+  background-color: $shape-bg-primary;
+  width: $triangle-big-wrapper-width;
+  height: $triangle-big-wrapper-height;
+  display: flex;
+  position: relative;
+
+  span {
+    width: 14px;
+    text-align: center;
+  }
+  &--right {
+    clip-path: polygon(0 0, 100% 50%, 0 100%);
+  }
+  &--left {
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+  }
+}

@@ -3,7 +3,7 @@ import React, {useContext, useEffect, useRef} from 'react';
 import {useTranslation} from 'react-i18next';
 import {PickedDate} from '@/components/wheel-pickers/types';
 import {dateConfig, initialYear, months} from '@/components/wheel-pickers/static';
-import {OnBoardingContentProps} from '@/pages/onboarding/types';
+import {OnBoardingContentProps} from '@/types/@onboarding';
 import {GradientButton} from '@/components';
 import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 

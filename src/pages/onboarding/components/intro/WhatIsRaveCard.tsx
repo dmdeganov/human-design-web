@@ -2,7 +2,7 @@ import React from 'react';
 import BlackGradientTile from '@/components/BlackGradientTile';
 import {useTranslation} from 'react-i18next';
 import {BodyGraphIcon} from "@/assets/svg";
-import {OnBoardingContentProps} from "@/pages/onboarding/types";
+import {OnBoardingContentProps} from "@/types/@onboarding";
 import {GradientButton} from "@/components";
 
 const WhatIsHumanDesign = ({goForward}: OnBoardingContentProps) => {

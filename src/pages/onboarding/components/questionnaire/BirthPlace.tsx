@@ -1,7 +1,7 @@
 import React, {FormEventHandler, useContext} from 'react';
 import {useTranslation} from 'react-i18next';
 import TextInput from '@/components/TextInput';
-import {BirthPlaceType, OnBoardingContentProps} from '@/pages/onboarding/types';
+import {BirthPlaceType, OnBoardingContentProps} from '@/types/@onboarding';
 import {GradientButton} from '@/components';
 import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 import Modal from '@/components/modal/Modal';

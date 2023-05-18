@@ -25,10 +25,18 @@ export interface UserDataI {
   }
   email: string;
 }
+
 export type BirthPlaceType = UserDataI['birthPlace'];
 
 export type  ChangeUserDataFn = (fieldName: keyof UserDataI, value: UserDataI[typeof fieldName]) => void
 export interface UserDataContextI {
   userData: UserDataI;
   changeUserData: ChangeUserDataFn;
+}
+
+export interface ParamsToGetBodyGraph {
+  language: 'ru' | 'en';
+  lat: number;
+  lon: number;
+  date: Date
 }

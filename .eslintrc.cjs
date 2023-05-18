@@ -21,6 +21,7 @@ module.exports = {
     rules: {
         'object-curly-newline': 'off',
         '@typescript-eslint/no-empty-function': 0,
+        '@typescript-eslint/no-non-null-assertion': 0,
         'react-hooks/rules-of-hooks': 'error',
         'react-hooks/exhaustive-deps': 'warn',
         'react/prop-types': 0,

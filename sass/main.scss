@@ -1,4 +1,4 @@
-@import "keen-slider/keen-slider.min.css";
+@import 'keen-slider/keen-slider.min.css';
 @import 'abstracts/variables';
 @import 'base/typography';
 @import 'abstracts/mixins';
@@ -21,3 +21,20 @@
 @import 'components/autocomplete-modal';
 @import 'components/google-autocomplete-suggestions';
 
+@import 'components/body-graph/triangle';
+@import 'components/body-graph/triangle-big';
+@import 'components/body-graph/square';
+@import 'components/body-graph/body-graph-grid';
+@import 'components/body-graph/gates-row';
+@import 'components/body-graph/rhombus';
+@import 'components/body-graph/head';
+@import 'components/body-graph/ajna';
+@import 'components/body-graph/throat';
+@import 'components/body-graph/g-center';
+@import 'components/body-graph/heart';
+@import 'components/body-graph/spleen';
+@import 'components/body-graph/sacral';
+@import 'components/body-graph/solar';
+@import 'components/body-graph/root';
+@import 'components/body-graph/svg-canvas';
+@import 'components/body-graph/bodygraph-js-canvas';
