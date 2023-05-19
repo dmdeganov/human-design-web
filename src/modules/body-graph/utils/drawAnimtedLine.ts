@@ -1,41 +1,44 @@
-// Math
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-nocheck
+import {Point} from '@/types/@bodyGraph';
 
-// Math
-export const drawLine = () => {
-  function getVectorFromTwoPoints(point1, point2) {
+export const getDrawAnimatedLine = () => {
+  const canvas = document.getElementById('bodygraph-js-canvas') as HTMLCanvasElement;
+  if (!canvas) return null;
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return null;
+  ctx.strokeStyle = '#fff';
+  ctx.lineWidth = 2
+  ctx.lineCap = "round";
+  ctx.lineJoin = 'round'
+  ctx.globalAlpha = 1
+  ctx.translate(0.5, 0.5);
+
+
+  // ctx.lineCap = 'round';
+  // ctx.lineWidth = 2.3;
+
+  const FRAME_DURATION = 1000 / 60; // 60fps frame duration ~16.66ms
+  const getTime =  Date.now;
+  function getVectorFromTwoPoints(point1: Point, point2: Point) {
     return {
       x: point2.x - point1.x,
       y: point2.y - point1.y,
     };
   }
 
-  function getDistanceBetweenPoints(point1, point2) {
+  function getDistanceBetweenPoints(point1: Point, point2: Point) {
     const x = point1.x - point2.x;
     const y = point1.y - point2.y;
 
     return Math.sqrt(x * x + y * y);
   }
-  // Animation constants
 
-  const FRAME_DURATION = 1000 / 60; // 60fps frame duration ~16.66ms
-  const getTime = typeof performance === 'function' ? performance.now : Date.now;
-
-  // Global requestAnimationFrame ID so we can cancel it when user clicks on "Draw again"
-  let rafID;
-
-  // Function to animate line drawing
-  function drawLine(startPoint, endPoint, drawingSpeed = 5, onAnimationEnd, startingLength = 0) {
+  const drawLine: DrawLineFn = (startPoint, endPoint, onAnimationEnd, startingLength = 0, drawingSpeed = 3) => {
     let lastUpdate = getTime();
-
-    // Set initial state
     let currentPoint = startPoint;
     const vector = getVectorFromTwoPoints(startPoint, endPoint);
     const startToEndDistance = getDistanceBetweenPoints(startPoint, endPoint);
 
     const lineStep = drawingSpeed / startToEndDistance;
-
     const vectorStep = {
       x: vector.x * lineStep,
       y: vector.y * lineStep,
@@ -98,15 +101,25 @@ export const drawLine = () => {
       // Update last updated time
       lastUpdate = now;
 
-      // Store requestAnimationFrame ID so we can cancel it
-      rafID = requestAnimationFrame(animate);
+      requestAnimationFrame(animate);
     };
 
     // Start animation
     animate();
-  }
 
-  function drawPolygon(vertices, drawingSpeed = 5, onAnimationEnd, startingLength = 0, startingPointIndex = 0) {
+
+
+
+  };
+
+  const drawPolygon: DrawPolygonFn = (
+    vertices,
+    onAnimationEnd,
+    drawingSpeed = 3,
+    startingLength = 0,
+    startingPointIndex = 0,
+    randomPropToBreakLines = false,
+  ) => {
     const start = vertices[startingPointIndex];
     const end = vertices[startingPointIndex + 1];
 
@@ -116,43 +129,35 @@ export const drawLine = () => {
       }
       return;
     }
-
     drawLine(
       start,
       end,
-      drawingSpeed,
-      startingLength => {
+      (startingLength?: number) => {
         const newIndex = startingPointIndex + 1;
-
-        drawPolygon(vertices, drawingSpeed, onAnimationEnd, startingLength, newIndex);
+        drawPolygon(vertices, onAnimationEnd, drawingSpeed, startingLength, newIndex);
       },
       startingLength,
+      drawingSpeed,
     );
-  }
+  };
 
-  // Demo
-
-  const vertices = [
-    {x: 50, y: 50},
-    {x: 450, y: 50},
-    {x: 250, y: 450},
-  ];
-
-  const canvas = document.querySelector('canvas'),
-    ctx = canvas.getContext('2d');
-  ctx.fillStyle = '#fff';
-
-  ctx.lineCap = 'round';
-  ctx.lineWidth = 20;
-
-  function draw() {
-    // Cancel previous animation
-    // cancelAnimationFrame(rafID);
-    // Clear canvas
-
-    // Draw polygon
-    drawPolygon(vertices, 5, () => console.log('done'));
-  }
-
-  draw();
+  return (vertices: Array<Point>) => {
+    drawPolygon(vertices, () => console.log('done'), 3);
+  };
 };
+
+type DrawPolygonFn = (
+  vertices: Array<Point>,
+  onAnimationEnd: (startLength?: number) => void,
+  drawingSpeed?: number,
+  startingLength?: number,
+  startingPointIndex?: number,
+) => void;
+
+type DrawLineFn = (
+  startPoint: Point,
+  endPoint: Point,
+  onAnimationEnd: (startLength?: number) => void,
+  startingLength: number,
+  drawingSpeed?: number,
+) => void;

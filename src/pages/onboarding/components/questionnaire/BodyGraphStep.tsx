@@ -19,7 +19,7 @@ const BodyGraphStep = () => {
   const {hour, minute, period} = birthTime || {};
   const birthDateAndTime = new Date(year, monthIndex, day, hour && (period === 'AM' ? hour : hour + 12), minute);
 
-  const {data, isLoading} = useBodyGraph({language: clientLanguage, lat, lon, date: birthDateAndTime});
+  // const {data, isLoading} = useBodyGraph({language: clientLanguage, lat, lon, date: birthDateAndTime});
 
   return (
     <div>

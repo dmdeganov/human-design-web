@@ -1,13 +1,14 @@
-import React, {ForwardedRef, forwardRef} from 'react';
+import React from 'react';
 import {Ajna, GCenter, Head, Heart, Root, Sacral, Solar, Spleen, Throat} from './centers';
 
 type BodyGraphGripProps = {
   children: React.ReactElement;
 };
 
-function BodyGraphGridInner(props: BodyGraphGripProps, ref: ForwardedRef<HTMLDivElement | null>) {
+function BodyGraphGrid(props: BodyGraphGripProps) {
   return (
-    <div className="body-graph-grid" ref={ref}>
+    <div className="body-graph-grid">
+      {props.children}
       <Head />
       <Ajna />
       <Throat />
@@ -19,12 +20,8 @@ function BodyGraphGridInner(props: BodyGraphGripProps, ref: ForwardedRef<HTMLDiv
       <Sacral />
       <Solar />
       <Root />
-      {props.children}
     </div>
   );
 }
 
-const BodyGraphGrid = forwardRef(BodyGraphGridInner);
-
 export default BodyGraphGrid;
-
