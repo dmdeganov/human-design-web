@@ -8,8 +8,8 @@ const SvgCanvas = ({activeGates}: {activeGates: number[]}) => {
     <svg width="100%" height="100%" className="svg-canvas">
       {allPossibleLines.map(({start, end, transit1, transit2}) => {
         const pointIds = [start, transit1, transit2, end].filter(pointId => pointId) as Array<pointsUnion>;
-        const pointsCoords = pointIds.map(pointId => allPointsCoords[pointId as pointsUnion]);
-        return <PolyLine key={`${start}-${transit1 || ''}-${transit2 || ''}-${end}`} pointsCoords={pointsCoords} />;
+        const vertices = pointIds.map(pointId => allPointsCoords[pointId as pointsUnion]);
+        return <PolyLine key={`${start}-${transit1 || ''}-${transit2 || ''}-${end}`} vertices={vertices} />;
       })}
       {/*{activeGates.map((gateId: number) => {*/}
       {/*  const matchingGateId = findMatchingGate(gateId);*/}

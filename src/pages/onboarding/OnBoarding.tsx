@@ -18,18 +18,18 @@ const userDataInitialState = {
   gender: '',
   name: 'james',
   birthDate: {
-    year: 1981,
+    year: 2016,
     monthIndex: 1,
     day: 14,
   },
   birthTime: {
-    hour: 11,
+    hour: 7,
     minute: 30,
     period: 'AM' as const,
   },
   birthPlace: {
-    lat: 55.755826,
-    lon: 37.6173,
+    lat: 35.755826,
+    lon: 27.6173,
     name: 'Москва, Россия',
   },
   email: 'adsfasdf@dsfsdf',

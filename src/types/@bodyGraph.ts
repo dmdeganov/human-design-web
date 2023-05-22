@@ -9,6 +9,31 @@ export interface Point {
   y: number;
 }
 
-export type PolyLineProps = {
-  pointsCoords: Array<Point>;
-};
+export interface BodyGraphDesignResponse {
+  channels: ChannelsMap;
+  gates: Array<number>;
+  planets: Array<Planet>;
+}
+export type ChannelId = `${number}-${number}`;
+
+export interface ChannelsMap {
+  [key: ChannelId]: Channel;
+}
+
+export interface Channel {
+  state: ChannelStateUnion;
+  gate?: NumericalString;
+}
+export type ChannelWithId = Channel & {id: ChannelId};
+export type ChannelStateUnion = 'half-active' | 'active';
+export type NumericalString = `${number}` | number;
+export interface Planet {
+  gate: number;
+  line: number;
+  color: number;
+  tone: number;
+}
+
+export interface ChannelsByGateIds {
+  [key: ChannelId] : Line
+}

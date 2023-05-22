@@ -1,6 +1,7 @@
 import {axios} from '@/appConfig';
 import {ParamsToGetBodyGraph} from '@/types/@onboarding';
 import {formatDate} from '@/utils';
+import {BodyGraphDesignResponse} from "@/types/@bodyGraph";
 
 export const fetchBodyGraph = async (params: ParamsToGetBodyGraph) => {
   const response = await axios.get('getdesign.php', {
@@ -9,5 +10,6 @@ export const fetchBodyGraph = async (params: ParamsToGetBodyGraph) => {
   const {
     data: {design},
   } = response;
-  return design;
+  return design as BodyGraphDesignResponse;
 };
+

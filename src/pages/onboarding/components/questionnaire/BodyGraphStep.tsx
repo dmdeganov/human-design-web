@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {useBodyGraph} from '@/pages/onboarding/hooks/useBodyGraph';
+import {useFetchBodyGraph} from '@/pages/onboarding/hooks/useFetchBodyGraph';
 import {UserDataContext} from '@/pages/onboarding/OnBoarding';
 import BodyGraph from '@/modules/body-graph/BodyGraph';
 
@@ -19,11 +19,12 @@ const BodyGraphStep = () => {
   const {hour, minute, period} = birthTime || {};
   const birthDateAndTime = new Date(year, monthIndex, day, hour && (period === 'AM' ? hour : hour + 12), minute);
 
-  // const {data, isLoading} = useBodyGraph({language: clientLanguage, lat, lon, date: birthDateAndTime});
-
+  const {data, isLoading, isSuccess} = useFetchBodyGraph({language: clientLanguage, lat, lon, date: birthDateAndTime});
+  const channels = isSuccess ? data.channels : null;
+  console.log(channels)
   return (
     <div>
-      <BodyGraph />
+      <BodyGraph channels={channels} />
     </div>
   );
 };

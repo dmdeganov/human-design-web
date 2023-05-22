@@ -1,26 +1,53 @@
 import React, {useEffect} from 'react';
-import {allPossibleLines} from '@/modules/body-graph/static/allPosibleLines';
-import {allPointsCoords, pointsUnion} from '@/modules/body-graph/static/allPointsCoords';
-import {PolyLineProps} from '@/types/@bodyGraph';
+import {allPossibleLines, channelsByGateIds} from '@/modules/body-graph/static/allPosibleLines';
+import {ChannelId, ChannelWithId, Point} from '@/types/@bodyGraph';
 import {getDrawAnimatedLine} from '@/modules/body-graph/utils/drawAnimtedLine';
+import {getVerticesForLine} from '@/modules/body-graph/components/getVerticesForLine';
 
-const JsCanvas = () => {
-  const baseLines = allPossibleLines.map(({start, end, transit1, transit2}) => {
-    const pointIds = [start, transit1, transit2, end].filter(pointId => pointId) as Array<pointsUnion>;
-    const pointsCoords = pointIds.map(pointId => allPointsCoords[pointId as pointsUnion]);
-    return {
-      key: `${start}-${transit1 || ''}-${transit2 || ''}-${end}`,
-      pointsCoords: pointsCoords,
-    };
-  });
+const baseLines = allPossibleLines.map(line => getVerticesForLine(line));
 
+const JsCanvas = ({activeChannels}: {activeChannels: Array<ChannelWithId>}) => {
   useEffect(() => {
     const drawAnimatedLine = getDrawAnimatedLine();
     if (!drawAnimatedLine) return;
-    baseLines.forEach(({pointsCoords}: PolyLineProps) => drawAnimatedLine(pointsCoords));
+    baseLines.forEach(vertices => drawAnimatedLine(vertices));
   }, []);
 
-  return <canvas id="bodygraph-js-canvas" width={390} height={580} />;
+  useEffect(() => {
+    if (!activeChannels.length) return;
+    setTimeout(
+      () =>
+        activeChannels.forEach(({id, state, gate}) => {
+          const {start, end, transit1, transit2} = channelsByGateIds[id];
+
+          if (!gate && state === 'active') {
+            const vertices = getVerticesForLine({start, end, transit1, transit2});
+            const drawAnimatedLine = getDrawAnimatedLine();
+            if (!drawAnimatedLine) return;
+            drawAnimatedLine(vertices, '#6851df');
+            return;
+          }
+          if (gate && state === 'half-active') {
+            const [channelStart, channelEnd] = (id as ChannelId).split('-').map(channelIdString => +channelIdString);
+            const drawAnimatedLine = getDrawAnimatedLine();
+            if (!drawAnimatedLine) return;
+            if (+gate === channelStart) {
+              const vertices = getVerticesForLine({start, end, transit1, transit2});
+              drawAnimatedLine(vertices, '#6851df', false, true);
+              return;
+            }
+            if (+gate === channelEnd) {
+              const vertices = getVerticesForLine({end, start, transit2, transit1});
+              drawAnimatedLine(vertices, '#ca4b77', false, true);
+              return;
+            }
+          }
+        }),
+      1000,
+    );
+  }, [activeChannels]);
+
+  return <canvas id="bodygraph-js-canvas" width={780} height={1160} />;
 };
 
 export default JsCanvas;

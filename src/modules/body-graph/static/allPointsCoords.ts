@@ -1,4 +1,6 @@
-export const allPointsCoords = {
+import {Point} from '@/types/@bodyGraph';
+
+export const allPointsCoordsOriginal = {
   1: {
     x: 191.8,
     y: 268,
@@ -9,7 +11,7 @@ export const allPointsCoords = {
   },
   3: {
     x: 191.8,
-    y: 488,
+    y: 492,
   },
   4: {
     x: 213,
@@ -33,7 +35,7 @@ export const allPointsCoords = {
   },
   9: {
     x: 206,
-    y: 488,
+    y: 492,
   },
   10: {
     x: 146,
@@ -100,7 +102,7 @@ export const allPointsCoords = {
     y: 323,
   },
   26: {
-    x: 269,
+    x: 239,
     y: 385,
   },
   27: {
@@ -165,7 +167,7 @@ export const allPointsCoords = {
   },
   42: {
     x: 177,
-    y: 488,
+    y: 492,
   },
   43: {
     x: 191.8,
@@ -255,14 +257,32 @@ export const allPointsCoords = {
     x: 169,
     y: 72,
   },
-  'nodeTop': {
+  nodeTop: {
     x: 99,
     y: 324,
   },
-  'nodeBottom': {
+  nodeBottom: {
     x: 69,
     y: 367,
-  }
+  },
 };
 
-export type pointsUnion = keyof typeof allPointsCoords
+export type pointsUnion = keyof typeof allPointsCoordsOriginal;
+
+const allPointsIds = Object.keys(allPointsCoordsOriginal);
+
+export const allPointsCoords = allPointsIds.reduce((acc, pointID) => {
+  const point = allPointsCoordsOriginal[pointID as pointsUnion];
+  // const pointCopy = {...point}
+  // allPointsCoordsOriginal[pointID as pointsUnion] = {
+  //   x: Math.round(point.x * 2),
+  //   y: Math.round(point.y * 2),
+  // };
+  return {
+    ...acc,
+    [pointID]: {
+      x: Math.round(point.x * 2),
+      y: Math.round(point.y * 2),
+    },
+  };
+}, {});
