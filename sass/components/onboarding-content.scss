@@ -28,10 +28,6 @@
       line-height: 19px;
     }
   }
-  &__bodygraph-container {
-    width: 335px;
-    height: 440px;
-  }
   &__inner {
     display: flex;
     flex-direction: column;
@@ -74,6 +70,9 @@
       .outlined-button {
         margin-top: auto;
       }
+    }
+    &__description{
+      white-space: unset;
     }
   }
 }

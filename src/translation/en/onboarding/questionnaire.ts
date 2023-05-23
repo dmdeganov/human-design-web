@@ -28,6 +28,6 @@ export const questionnaire = {
   bodygraph: {
     title: 'Bodygraph is ready!',
     description:
-      'Now all the personality secrets will be revealed to you, you will find the best ways for harmonious contact and productive interaction.',
+      'Now all the personality secrets will be\n revealed to you, you will find the best ways\n for harmonious contact and productive\n interaction.',
   },
 };

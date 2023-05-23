@@ -16,7 +16,7 @@ export const BodyGraphContext = React.createContext<BodyGraphContextI>({activeGa
 interface Props {
   channels: ChannelToDraw[] | null;
   centers: {[key: number]: Center} | null;
-  size: 'sm' | 'md' | 'lg';
+  size: 'mob-sm' | 'desk-sm' | 'mob' | 'desk';
   zoomOnMount: boolean;
 }
 

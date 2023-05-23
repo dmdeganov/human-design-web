@@ -2,13 +2,18 @@
   position: relative;
   transition: all 2500ms;
 
-  &--sm {
+  &--desk-sm {
     width: 296.4px;
     height: 440.8px;
     .bodygraph-grid {
-      top: 0;
-      left: 0;
       transform: scale(0.757) translate(-63px, -94px);
+    }
+  }
+  &--mob-sm{
+    width: 214px;
+    height: 317px;
+    .bodygraph-grid {
+      transform: scale(0.548) translate(-160px, -242px);
     }
   }
 
