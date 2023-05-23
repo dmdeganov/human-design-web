@@ -38,6 +38,8 @@ $gradient-ellipse-blur: calc(#{$gradient-ellipse-height} * (0.3));
   overflow: hidden;
   position: relative;
   height: 100%;
+  align-items: center;
+  justify-content: center;
   &__chakras {
     height: 100%;
     width: 100%;
@@ -81,12 +83,16 @@ $gradient-ellipse-blur: calc(#{$gradient-ellipse-height} * (0.3));
     //top: calc(50% - 495px);
     //left: calc(50% - 495px);
   }
+  &__inner{
+    z-index: 10;
+
+  }
   &__content {
     max-width: 335px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    //position: absolute;
+    //top: 50%;
+    //left: 50%;
+    //transform: translate(-50%, -50%);
   }
   &__back-icon {
     position: absolute;

@@ -11,7 +11,6 @@ const BirthDate = ({goForward}: OnBoardingContentProps) => {
   const {t} = useTranslation();
   const {changeUserData, userData: {birthDate} } = useContext(UserDataContext); // prettier-ignore
   const {year, monthIndex, day} = birthDate || {};
-  console.log({year, monthIndex, day});
 
   const dateRef = useRef<PickedDate & {isAnimationActive: boolean}>({
     day: day || 1,

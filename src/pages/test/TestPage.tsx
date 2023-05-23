@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
-import JsCanvas from '@/modules/body-graph/components/JSCanvas';
-import BodyGraph from '@/modules/body-graph/BodyGraph';
+import JsCanvas from '@/modules/bodygraph/components/JSCanvas';
+import BodyGraph from '@/modules/bodygraph/BodyGraph';
 
 const channels = {
   '1-8': {

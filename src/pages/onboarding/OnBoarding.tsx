@@ -18,8 +18,8 @@ const userDataInitialState = {
   gender: '',
   name: 'james',
   birthDate: {
-    year: 2016,
-    monthIndex: 1,
+    year: 1991,
+    monthIndex: 10,
     day: 14,
   },
   birthTime: {

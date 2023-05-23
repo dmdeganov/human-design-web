@@ -12,17 +12,22 @@ export const questionnaire = {
     title: 'Time of birth',
     description:
       'It will show the exact location of the planets and stars at the time of your birth, which is important for calculating the card.',
-    dont_know: 'I don\'t know for sure'
+    dont_know: "I don't know for sure",
   },
   birth_place: {
     title: 'Place of birth',
     description:
       'The place where you were born is very important. We will be able to accurately determine the position of the heavenly bodies that have left an imprint on your destiny.',
-    input_placeholder: 'City, Country'
+    input_placeholder: 'City, Country',
   },
   email: {
     title: 'E-mail address',
     description: 'To finish creating your account, please give us your e-mail',
-    input_placeholder: 'E-mail'
-  }
+    input_placeholder: 'E-mail',
+  },
+  bodygraph: {
+    title: 'Bodygraph is ready!',
+    description:
+      'Now all the personality secrets will be revealed to you, you will find the best ways for harmonious contact and productive interaction.',
+  },
 };
